@@ -1,6 +1,6 @@
 $(document).ready(function() 
 {
-  	var x, flag = 0, codigo = null, atv;
+  	var x, flag = 0, codigo = null, atv, cor = null;
 
   	//Obter o id de utilizador através do cookie
 
@@ -18,6 +18,13 @@ $(document).ready(function()
         if (c.indexOf(cookie) == 0) 
         	id = c.substring(cookie.length,c.length);
     }
+
+    var obj = {};
+
+    obj['user-actual'] = id;
+    obj['color-actual'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+
+	chrome.storage.local.set(obj);
 
 
     function code_input()
@@ -70,7 +77,17 @@ $(document).ready(function()
 				codigo = _.cloneDeep(items[allKeys[i]]);
 
 				atv = items['atv-'+allKeys[i]];
+
+				cor = items['cor-'+allKeys[i]];
 			}
+		}
+
+		if(cor != null)
+		{
+			$('#blueBar.fixed_elem').css({
+				'background-image': 'none',
+				'background-color': cor
+			});
 		}
 
 		// Se o código for diferente de 0 e se a conta estiver ativa significa que o utilizador está registado e como tal aparece a janela para introduzir o código
@@ -94,9 +111,22 @@ $(document).ready(function()
 				var obj = {};
 
 			    obj['c_user'] = id;
+			    obj['cor_user'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
 
 				chrome.storage.local.set(obj);
 			}
 		}
 	});
+
+	//Código para tratar das cores
+
+	function rgb2hex(rgb){
+		 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		 return "#" +
+		  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+	}
+
+    
 });

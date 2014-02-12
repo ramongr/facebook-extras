@@ -13,8 +13,12 @@ function getData()
 		{
 			var n = allKeys[i].search('id-');
 			var m = allKeys[i].search('atv-');
+			var p = allKeys[i].search('cor-');
+			var q = allKeys[i].search('user-actual');
+			var r = allKeys[i].search('color-actual');
+			var s = allKeys[i].search('cor_user');
 
-			if(n == -1 && m == -1)
+			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -117,7 +121,7 @@ function clickHandler(e)
 				{
 					//Se não houver uma sessão aberta do facebook, é devolvido um erro
 
-					chrome.storage.local.get('c_user', function (result) {
+					chrome.storage.local.get(['c_user', 'cor_user'], function (result) {
 
 						if(_.isEmpty(result['c_user']) == false)
 						{
@@ -142,14 +146,17 @@ function clickHandler(e)
 										obj[email] = CryptoJS.SHA3(code);
 										obj['id-'+email] = result['c_user'];
 										obj['atv-'+email] = '0';
+										obj['cor-'+email] = result['cor_user'];
 
 										chrome.storage.local.set(obj);
 
 										bootbox.alert("<br><div class='text'><b>Dados guardados com sucesso.</b></div>");
 
 										chrome.storage.local.remove('c_user', function() {});
+										chrome.storage.local.remove('cor_user', function() {});
 
 										getData();
+										getCor();
 									}
 									else
 									{
@@ -383,9 +390,62 @@ function teste()
 	console.log(_.isEqual(a, c));
 }*/
 
+$(document).ready(function(){
+
+	$('.nav-tabs a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+
+	var c = document.getElementById("cor-input");
+
+	c.addEventListener("input", function() {
+
+		if(c.value)
+		{
+			chrome.storage.local.get(null, function(items) {
+
+			    var allKeys = Object.keys(items);
+
+			    for (var i = 1; i < allKeys.length; i++) 
+				{
+					if(items['id-'+allKeys[i]] == items['user-actual'])
+					{
+						var obj = {};
+
+		                obj['cor-'+allKeys[i]] = $('#cor-input').val();
+
+						chrome.storage.local.set(obj);
+					}
+				}
+			});
+		}
+
+	}, false); 
+});
+
+
+function getCor()
+{
+	chrome.storage.local.get(null, function(items) {
+
+	    var allKeys = Object.keys(items);
+
+	    for (var i = 1; i < allKeys.length; i++) 
+		{
+			if(items['id-'+allKeys[i]] == items['user-actual'])
+			{
+				$('#email-actual').text(allKeys[i]);
+				$('#cor-input').val(items['cor-'+allKeys[i]]);
+			}
+		}
+	});
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
   getData();
+  getCor();
   //getAll();
 });
 	
