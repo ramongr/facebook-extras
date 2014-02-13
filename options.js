@@ -17,8 +17,9 @@ function getData()
 			var q = allKeys[i].search('user-actual');
 			var r = allKeys[i].search('color-actual');
 			var s = allKeys[i].search('cor_user');
+			var t = allKeys[i].search('pat-');
 
-			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1)
+			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1 && t == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -392,6 +393,9 @@ function teste()
 
 $(document).ready(function(){
 
+	$('#cor').hide();
+	$('#pat').hide();
+
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
@@ -415,6 +419,10 @@ $(document).ready(function(){
 
 		                obj['cor-'+allKeys[i]] = $('#cor-input').val();
 
+		                obj['pat-'+allKeys[i]] = null;
+
+		                $('#pattern-input').val('');
+
 						chrome.storage.local.set(obj);
 					}
 				}
@@ -422,6 +430,45 @@ $(document).ready(function(){
 		}
 
 	}, false); 
+
+	$('#add-pattern').on('click', function() {
+
+		var obj = {};
+
+		obj['cor-'+$('#email-actual').text()] = null;
+
+        obj['pat-'+$('#email-actual').text()] = $('#pattern-input').val();
+
+		chrome.storage.local.set(obj);
+
+	});
+
+	$('#rm-pattern').on('click', function() {
+
+		var obj = {};
+
+        obj['pat-'+$('#email-actual').text()] = null;
+
+        $('#pattern-input').val('');
+
+		chrome.storage.local.set(obj);
+
+	});
+
+	$("input[name='barra']").on('click', function() {
+
+		if($("input[name='barra']:checked").val() == 0)
+		{
+			$('#cor').show();
+			$('#pat').hide();
+		}
+
+		if($("input[name='barra']:checked").val() == 1)
+		{
+			$('#pat').show();
+			$('#cor').hide();
+		}
+	});
 });
 
 
@@ -437,6 +484,7 @@ function getCor()
 			{
 				$('#email-actual').text(allKeys[i]);
 				$('#cor-input').val(items['cor-'+allKeys[i]]);
+				$('#pattern-input').val(items['pat-'+allKeys[i]])
 			}
 		}
 	});

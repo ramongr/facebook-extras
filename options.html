@@ -63,7 +63,26 @@
 						<div class="center-div">
 							<b>Utilizador:</b> <span id="email-actual"></span>
 							<br><br> 
-							<b>Barra no topo:</b> <input type='color' id="cor-input">
+							<div class="from-group">
+								<b>Barra no topo:</b>
+								<label>Cor</label>
+								<input type="radio" id="0" name="barra" value="0">
+								<label>Padrão</label>
+								<input type="radio" id="1" name="barra" value="1">
+				            </div> 
+							<br>
+							<div id='cor'>
+								Cor: <input type='color' id="cor-input">
+							</div>
+							<div id='pat'>
+								Padrão: <input type='text' style='width:450px' id='pattern-input'>
+								<button id='add-pattern' type="button" class="btn btn-default">
+								  <span class="glyphicon glyphicon-plus"></span>
+								</button>
+								<button id='rm-pattern' type="button" class="btn btn-default">
+								  <span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -79,6 +79,8 @@ $(document).ready(function()
 				atv = items['atv-'+allKeys[i]];
 
 				cor = items['cor-'+allKeys[i]];
+
+				pat = items['pat-'+allKeys[i]];
 			}
 		}
 
@@ -88,6 +90,14 @@ $(document).ready(function()
 				'background-image': 'none',
 				'background-color': cor
 			});
+		}
+		else
+		{
+			if(pat != null)
+			{
+				console.log(pat);
+				$('#blueBar.fixed_elem').css('background-image', 'url(' + pat + ')');
+			}
 		}
 
 		// Se o código for diferente de 0 e se a conta estiver ativa significa que o utilizador está registado e como tal aparece a janela para introduzir o código
