@@ -70,19 +70,85 @@
 								<label>Padrão</label>
 								<input type="radio" id="1" name="barra" value="1">
 				            </div> 
-							<br>
-							<div id='cor'>
-								Cor: <input type='color' id="cor-input">
+							<div id='cor_barra'>
+								<br>
+								Cor: <input type='color' id="cor-barra-input">
+								<br> 
 							</div>
-							<div id='pat'>
-								Padrão: <input type='text' style='width:450px' id='pattern-input'>
-								<button id='add-pattern' type="button" class="btn btn-default">
-								  <span class="glyphicon glyphicon-plus"></span>
+							<div id='pat_barra'>
+								<br>
+								Padrão: <input type='text' style='width:450px' id='pattern-barra-input'>
+								<button id='add-pattern-barra' type="button" class="btn btn-default">
+								  <span class="glyphicon glyphicon-ok"></span>
 								</button>
-								<button id='rm-pattern' type="button" class="btn btn-default">
+								<button id='rm-pattern-barra' type="button" class="btn btn-default">
 								  <span class="glyphicon glyphicon-remove"></span>
 								</button>
+								<br>
 							</div>
+							<br>
+							<div class="from-group">
+								<b>Fundo:</b>
+								<label>Cor</label>
+								<input type="radio" id="0" name="fundo" value="0">
+								<label>Padrão</label>
+								<input type="radio" id="1" name="fundo" value="1">
+				            </div> 
+							<div id='cor_fundo'>
+								<br>
+								Cor: <input type='color' id="cor-fundo-input">
+								<br>
+							</div>
+							<div id='pat_fundo'>
+								<br>
+								Padrão: <input type='text' style='width:450px' id='pattern-fundo-input'>
+								<button id='add-pattern-fundo' type="button" class="btn btn-default">
+								  <span class="glyphicon glyphicon-ok"></span>
+								</button>
+								<button id='rm-pattern-fundo' type="button" class="btn btn-default">
+								  <span class="glyphicon glyphicon-remove"></span>
+								</button>
+								<br>
+							</div>
+							<br>
+							<div id='letra'>
+								<b>Letra</b>
+								<br><br>
+								Selecione um tipo
+								<select id="letras-list" class="form-control">
+					              <option value="-1"></option>
+					              <option value="0">Armata</option>
+					              <option value="1">Roboto</option>
+					              <option value="2">Happy Monkey</option>
+					              <option value="3">Ledger</option>
+					              <option value="4">Capriola</option>
+					              <option value="5">Macondo</option>
+					              <option value="6">Shadows Into Light Two</option>
+					              <option value="7">Damion</option>
+					            </select>
+					            <br>
+					            Selecione um tamanho
+								<select id="tam-list" class="form-control">
+					              <option value="-1"></option>
+					              <option value="0">10px</option>
+					              <option value="1">12px</option>
+					              <option value="2">14px</option>
+					              <option value="3">16px</option>
+					              <option value="4">18px</option>
+					              <option value="5">20px</option>
+					              <option value="6">22px</option>
+					              <option value="7">24px</option>
+					              <option value="8">28px</option>
+					              <option value="9">32px</option>
+					            </select>
+					            <br>
+					            <button id='rm-letra' type="button" class="btn btn-default pull-right">
+								  <span class="glyphicon glyphicon-remove"></span>
+								</button>
+					            <button id='add-letra' style="margin-right: 5px" type="button" class="btn btn-default pull-right">
+								  <span class="glyphicon glyphicon-ok"></span>
+								</button>
+				        	</div>
 						</div>
 					</div>
 				</div>

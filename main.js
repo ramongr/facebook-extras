@@ -1,6 +1,6 @@
 $(document).ready(function() 
 {
-  	var x, flag = 0, codigo = null, atv, cor = null;
+  	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null;
 
   	//Obter o id de utilizador através do cookie
 
@@ -22,7 +22,8 @@ $(document).ready(function()
     var obj = {};
 
     obj['user-actual'] = id;
-    obj['color-actual'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+    obj['color-br-actual'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+    obj['color-fd-actual'] = rgb2hex($('body').css('background-color'));
 
 	chrome.storage.local.set(obj);
 
@@ -78,26 +79,62 @@ $(document).ready(function()
 
 				atv = items['atv-'+allKeys[i]];
 
-				cor = items['cor-'+allKeys[i]];
+				cor_br = items['cor-br-'+allKeys[i]];
+				pat_br = items['pat-br-'+allKeys[i]];
 
-				pat = items['pat-'+allKeys[i]];
+				cor_fd = items['cor-fd-'+allKeys[i]];
+				pat_fd = items['pat-fd-'+allKeys[i]];
+
+				link_lt = items['link-lt-'+allKeys[i]];
+				letra = items['letra-'+allKeys[i]];
+				tam_lt = items['tam-lt-'+allKeys[i]];
 			}
 		}
 
-		if(cor != null)
+		if(cor_br != null)
 		{
 			$('#blueBar.fixed_elem').css({
 				'background-image': 'none',
-				'background-color': cor
+				'background-color': cor_br
 			});
 		}
 		else
 		{
-			if(pat != null)
+			if(pat_br != null)
 			{
-				console.log(pat);
-				$('#blueBar.fixed_elem').css('background-image', 'url(' + pat + ')');
+				$('#blueBar.fixed_elem').css('background-image', 'url(' + pat_br + ')');
 			}
+		}
+
+		if(cor_fd != null)
+		{
+			$('body').css({
+				'background-image': 'none',
+				'background-color': cor_fd
+			});
+
+			$('#leftCol').css({
+				'background-image': 'none',
+				'background-color': 'white'
+			});
+		}
+		else
+		{
+			if(pat_fd != null)
+			{
+				$('body').css('background-image', 'url(' + pat_fd + ')');
+
+				$('#leftCol').css('background-color', 'white');
+			}
+		}
+
+		if(link_lt != null)
+		{
+			$('head').append(link_lt);
+
+			$('body').css('font-family', 'Armata');
+
+			$('body').css('font-size', '12px');
 		}
 
 		// Se o código for diferente de 0 e se a conta estiver ativa significa que o utilizador está registado e como tal aparece a janela para introduzir o código
@@ -121,7 +158,8 @@ $(document).ready(function()
 				var obj = {};
 
 			    obj['c_user'] = id;
-			    obj['cor_user'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+			    obj['cor_br_user'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+			    obj['cor_fd_user'] = rgb2hex($('body').css('background-color'));
 
 				chrome.storage.local.set(obj);
 			}

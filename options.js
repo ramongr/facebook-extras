@@ -13,13 +13,17 @@ function getData()
 		{
 			var n = allKeys[i].search('id-');
 			var m = allKeys[i].search('atv-');
-			var p = allKeys[i].search('cor-');
+			var p = allKeys[i].search('cor-br-');
 			var q = allKeys[i].search('user-actual');
-			var r = allKeys[i].search('color-actual');
-			var s = allKeys[i].search('cor_user');
-			var t = allKeys[i].search('pat-');
+			var r = allKeys[i].search('color-br-actual');
+			var s = allKeys[i].search('cor_br_user');
+			var t = allKeys[i].search('pat-br-');
+			var u = allKeys[i].search('pat-fd-');
+			var v = allKeys[i].search('cor-fd-');
+			var x = allKeys[i].search('color-fd-actual');
+			var y = allKeys[i].search('cor_fd_user');
 
-			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1 && t == -1)
+			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1 && t == -1 && u == -1 && v == -1 && x == -1 && y == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -122,7 +126,7 @@ function clickHandler(e)
 				{
 					//Se não houver uma sessão aberta do facebook, é devolvido um erro
 
-					chrome.storage.local.get(['c_user', 'cor_user'], function (result) {
+					chrome.storage.local.get(['c_user', 'cor_br_user', 'cor_fd_user'], function (result) {
 
 						if(_.isEmpty(result['c_user']) == false)
 						{
@@ -147,17 +151,19 @@ function clickHandler(e)
 										obj[email] = CryptoJS.SHA3(code);
 										obj['id-'+email] = result['c_user'];
 										obj['atv-'+email] = '0';
-										obj['cor-'+email] = result['cor_user'];
+										obj['cor-br-'+email] = result['cor_br_user'];
+										obj['cor-fd-'+email] = result['cor_fd_user'];
 
 										chrome.storage.local.set(obj);
 
 										bootbox.alert("<br><div class='text'><b>Dados guardados com sucesso.</b></div>");
 
 										chrome.storage.local.remove('c_user', function() {});
-										chrome.storage.local.remove('cor_user', function() {});
+										chrome.storage.local.remove('cor_br_user', function() {});
+										chrome.storage.local.remove('cor_fd_user', function() {});
 
 										getData();
-										getCor();
+										getCustomData();
 									}
 									else
 									{
@@ -393,15 +399,17 @@ function teste()
 
 $(document).ready(function(){
 
-	$('#cor').hide();
-	$('#pat').hide();
+	$('#cor_barra').hide();
+	$('#pat_barra').hide();
+	$('#cor_fundo').hide();
+	$('#pat_fundo').hide();
 
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
 	});
 
-	var c = document.getElementById("cor-input");
+	var c = document.getElementById("cor-barra-input");
 
 	c.addEventListener("input", function() {
 
@@ -417,11 +425,11 @@ $(document).ready(function(){
 					{
 						var obj = {};
 
-		                obj['cor-'+allKeys[i]] = $('#cor-input').val();
+		                obj['cor-br-'+allKeys[i]] = $('#cor-barra-input').val();
 
-		                obj['pat-'+allKeys[i]] = null;
+		                obj['pat-br-'+allKeys[i]] = null;
 
-		                $('#pattern-input').val('');
+		                $('#pattern-barra-input').val('');
 
 						chrome.storage.local.set(obj);
 					}
@@ -431,25 +439,25 @@ $(document).ready(function(){
 
 	}, false); 
 
-	$('#add-pattern').on('click', function() {
+	$('#add-pattern-barra').on('click', function() {
 
 		var obj = {};
 
-		obj['cor-'+$('#email-actual').text()] = null;
+		obj['cor-br-'+$('#email-actual').text()] = null;
 
-        obj['pat-'+$('#email-actual').text()] = $('#pattern-input').val();
+        obj['pat-br-'+$('#email-actual').text()] = $('#pattern-barra-input').val();
 
 		chrome.storage.local.set(obj);
 
 	});
 
-	$('#rm-pattern').on('click', function() {
+	$('#rm-pattern-barra').on('click', function() {
 
 		var obj = {};
 
-        obj['pat-'+$('#email-actual').text()] = null;
+        obj['pat-br-'+$('#email-actual').text()] = null;
 
-        $('#pattern-input').val('');
+        $('#pattern-barra-input').val('');
 
 		chrome.storage.local.set(obj);
 
@@ -459,20 +467,146 @@ $(document).ready(function(){
 
 		if($("input[name='barra']:checked").val() == 0)
 		{
-			$('#cor').show();
-			$('#pat').hide();
+			$('#cor_barra').show();
+			$('#pat_barra').hide();
 		}
 
 		if($("input[name='barra']:checked").val() == 1)
 		{
-			$('#pat').show();
-			$('#cor').hide();
+			$('#pat_barra').show();
+			$('#cor_barra').hide();
 		}
+	});
+
+	var d = document.getElementById("cor-fundo-input");
+
+	d.addEventListener("input", function() {
+
+		if(d.value)
+		{
+			chrome.storage.local.get(null, function(items) {
+
+			    var allKeys = Object.keys(items);
+
+			    for (var i = 1; i < allKeys.length; i++) 
+				{
+					if(items['id-'+allKeys[i]] == items['user-actual'])
+					{
+						var obj = {};
+
+		                obj['cor-fd-'+allKeys[i]] = $('#cor-fundo-input').val();
+
+		                obj['pat-fd-'+allKeys[i]] = null;
+
+		                $('#pattern-fundo-input').val('');
+
+						chrome.storage.local.set(obj);
+					}
+				}
+			});
+		}
+
+	}, false); 
+
+	$('#add-pattern-fundo').on('click', function() {
+
+		var obj = {};
+
+		obj['cor-fd-'+$('#email-actual').text()] = null;
+
+        obj['pat-fd-'+$('#email-actual').text()] = $('#pattern-fundo-input').val();
+
+		chrome.storage.local.set(obj);
+
+	});
+
+	$('#rm-pattern-fundo').on('click', function() {
+
+		var obj = {};
+
+        obj['pat-fd-'+$('#email-actual').text()] = null;
+
+        $('#pattern-fundo-input').val('');
+
+		chrome.storage.local.set(obj);
+
+	});
+
+	$("input[name='fundo']").on('click', function() {
+
+		if($("input[name='fundo']:checked").val() == 0)
+		{
+			$('#cor_fundo').show();
+			$('#pat_fundo').hide();
+		}
+
+		if($("input[name='fundo']:checked").val() == 1)
+		{
+			$('#pat_fundo').show();
+			$('#cor_fundo').hide();
+		}
+	});
+
+	$('#add-letra').on('click', function() {
+
+		var obj = {};
+
+		switch($('#letras-list').val())
+		{
+			case '0': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Armata', sans-serif";
+					  break; 
+
+			case '1':
+
+			case '2':
+
+			case '3':
+
+			case '4':
+
+			case '5':
+
+			case '6':
+
+			case '7':
+		}
+
+		switch($('#tam-list').val())
+		{
+			case '0': obj['tam-lt-'+$('#email-actual').text()] = "10px"; break;
+
+			case '1':
+
+			case '2':
+
+			case '3':
+
+			case '4':
+
+			case '5':
+
+			case '6':
+
+			case '7':
+
+			case '8':
+
+			case '9':
+
+			case '10':
+		}  
+
+		chrome.storage.local.set(obj);
+	});
+
+	$('#rm-letra').on('click', function() {
+
 	});
 });
 
 
-function getCor()
+function getCustomData()
 {
 	chrome.storage.local.get(null, function(items) {
 
@@ -483,8 +617,10 @@ function getCor()
 			if(items['id-'+allKeys[i]] == items['user-actual'])
 			{
 				$('#email-actual').text(allKeys[i]);
-				$('#cor-input').val(items['cor-'+allKeys[i]]);
-				$('#pattern-input').val(items['pat-'+allKeys[i]])
+				$('#cor-barra-input').val(items['cor-br-'+allKeys[i]]);
+				$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
+				$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
+				$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
 			}
 		}
 	});
@@ -493,7 +629,7 @@ function getCor()
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
   getData();
-  getCor();
+  getCustomData();
   //getAll();
 });
 	
