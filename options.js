@@ -433,6 +433,8 @@ $(document).ready(function(){
 
 		                obj['pat-br-'+allKeys[i]] = null;
 
+		                $('#fbBar1').css('background-color', $('#cor-barra-input').val());
+
 		                $('#pattern-barra-input').val('');
 
 						chrome.storage.local.set(obj);
@@ -451,6 +453,8 @@ $(document).ready(function(){
 
         obj['pat-br-'+$('#email-actual').text()] = $('#pattern-barra-input').val();
 
+        $('#fbBar2').css('background-image', 'url(' + $('#pattern-barra-input').val() + ')');
+
 		chrome.storage.local.set(obj);
 
 	});
@@ -462,6 +466,8 @@ $(document).ready(function(){
         obj['pat-br-'+$('#email-actual').text()] = null;
 
         $('#pattern-barra-input').val('');
+
+        $('#fbBar2').css({'background-image': 'none', 'background-color': '#3b5998' });
 
 		chrome.storage.local.set(obj);
 

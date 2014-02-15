@@ -22,144 +22,23 @@
 <body>
 	
 	<br>
+	<div class="content">
 
-		<div class="content">
+	<!--<div class="dropdown">
+	<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+	<h4 class="title">Idioma <span class="caret"></span></h4>
+	</a>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	<li><a href="#">Português</a></li>
+	<li><a href="#">Inglês</a></li>
+	</ul>
+	</div>-->
 
-		<!--<div class="dropdown">
-		<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-		<h4 class="title">Idioma <span class="caret"></span></h4>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		<li><a href="#">Português</a></li>
-		<li><a href="#">Inglês</a></li>
-		</ul>
-		</div>-->
+		<h3 class='title text-center'><b>Opções</b></h3>
 
-			<h3 class='title text-center'><b>Opções</b></h3>
-
-<<<<<<< HEAD
-			<br><br>
-			<div class="row-fluid">
-				<div class="col-md-2"></div>
-				<div style="border-right:1px solid #000;height:124px" class="col-md-2">
-					<ul id="Tabs" class="nav nav-pills nav-stacked">
-						<li class="active"><a href="#users" data-toggle="tab">Utilizadores</a></li>
-						<li><a href="#safety" data-toggle="tab">Segurança</a></li>
-						<li><a href="#custom" data-toggle="tab">Personalizar</a></li>
-					</ul>
-				</div>
-
-				<div class="tab-content">
-					<div style="margin-left: 30px" class="tab-pane fade in active" id="users">
-						<div class="row">
-							<div style="text-align:right;" class="center-div">
-								<button id="new_user" type="button" class="btn btn-primary">Novo Utilizador</button>
-								<br><br>
-								<div class="text-center" id='table-print'></div>
-							</div>
-						</div>
-					</div>
-					<div style="margin-left: 30px" class="tab-pane fade" id="safety">
-					</div>
-					<div style="margin-left: 30px" class="tab-pane fade" id="custom">
-						<div class="center-div">
-							<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
-							<br><br>
-							<b>Utilizador:</b> <span id="email-actual"></span>
-							<br><br> 
-							<div class="from-group">
-								<b>Barra no topo:</b>
-								<label>Cor</label>
-								<input type="radio" id="0" name="barra" value="0">
-								<label>Padrão</label>
-								<input type="radio" id="1" name="barra" value="1">
-				            </div> 
-							<div id='cor_barra'>
-								<br>
-								Cor: <input type='color' id="cor-barra-input">
-								<br> 
-							</div>
-							<div id='pat_barra'>
-								<br>
-								<input type='text' style='width:450px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
-								<button id='add-pattern-barra' type="button" class="btn btn-success">
-								  <span class="glyphicon glyphicon-ok"></span>
-								</button>
-								<button id='rm-pattern-barra' type="button" class="btn btn-danger">
-								  <span class="glyphicon glyphicon-remove"></span>
-								</button>
-								<br>
-							</div>
-							<br>
-							<div class="from-group">
-								<b>Fundo:</b>
-								<label>Cor</label>
-								<input type="radio" id="0" name="fundo" value="0">
-								<label>Padrão</label>
-								<input type="radio" id="1" name="fundo" value="1">
-				            </div> 
-							<div id='cor_fundo'>
-								<br>
-								Cor: <input type='color' id="cor-fundo-input">
-								<br>
-							</div>
-							<div id='pat_fundo'>
-								<br>
-								<input type="text" style="width:450px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
-								<button id="add-pattern-fundo" type="button" class="btn btn-success">
-								  <span class="glyphicon glyphicon-ok"></span>
-								</button>
-								<button id="rm-pattern-fundo" type="button" class="btn btn-danger">
-								  <span class="glyphicon glyphicon-remove"></span>
-								</button>
-								<br>
-							</div>
-							<br>
-							<div id='letra'>
-								<b>Letra</b>
-								<br><br>
-								Selecione um tipo
-								<select style="width: 200px" id="letras-list" class="form-control">
-					              <option value="-1"></option>
-					              <option value="0">Armata</option>
-					              <option value="1">Roboto</option>
-					              <option value="2">Happy Monkey</option>
-					              <option value="3">Ledger</option>
-					              <option value="4">Capriola</option>
-					              <option value="5">Ruda</option>
-					              <option value="6">Shadows Into Light Two</option>
-					              <option value="7">Courgette</option>
-					            </select>
-					            <br>
-					            Selecione um tamanho
-								<select style="width: 200px" id="tam-list" class="form-control">
-					              <option value="-1"></option>
-					              <option value="0">10px</option>
-					              <option value="1">12px</option>
-					              <option value="2">14px</option>
-					              <option value="3">16px</option>
-					              <option value="4">18px</option>
-					              <option value="5">20px</option>
-					              <option value="6">22px</option>
-					              <option value="7">24px</option>
-					              <option value="8">28px</option>
-					              <option value="9">32px</option>
-					            </select>
-					            <br>
-					            <button id='add-letra' style="margin-left: 110px; margin-right: 5px" type="button" class="btn btn-success">
-								  <span class="glyphicon glyphicon-ok"></span>
-								</button>
-					            <button id='rm-letra' type="button" class="btn btn-danger">
-								  <span class="glyphicon glyphicon-remove"></span>
-								</button>
-				        	</div>
-						</div>
-					</div>
-				</div>
-			</div>	
-		</div>
 		<br><br>
 		<div class="row-fluid">
+			<div class="col-md-2"></div>
 			<div style="border-right:1px solid #000;height:124px" class="col-md-2">
 				<ul id="Tabs" class="nav nav-pills nav-stacked">
 					<li class="active"><a href="#users" data-toggle="tab">Utilizadores</a></li>
@@ -169,21 +48,123 @@
 			</div>
 
 			<div class="tab-content">
-				<div class="tab-pane fade in active" id="users">
+				<div style="margin-left: 30px" class="tab-pane fade in active" id="users">
 					<div class="row">
 						<div style="text-align:right;" class="center-div">
 							<button id="new_user" type="button" class="btn btn-primary">Novo Utilizador</button>
 							<br><br>
-						<div class="text-center" id='table-print'></div>
+							<div class="text-center" id='table-print'></div>
+						</div>
 					</div>
 				</div>
+				<div style="margin-left: 30px" class="tab-pane fade" id="safety">
 				</div>
-				<div class="tab-pane fade" id="safety">
-				</div>
-				<div class="tab-pane fade" id="custom">
+				<div style="margin-left: 30px" class="tab-pane fade" id="custom">
+					<div class="center-div">
+						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
+						<br><br>
+						<b>Utilizador:</b> <span id="email-actual"></span>
+						<br><br> 
+						<div class="from-group">
+							<b>Barra no topo:</b>
+							<label>Cor</label>
+							<input type="radio" id="0" name="barra" value="0">
+							<label>Padrão</label>
+							<input type="radio" id="1" name="barra" value="1">
+			            </div> 
+						<div id='cor_barra'>
+							<br>
+							Cor: <input type='color' id="cor-barra-input">
+							<br><br>
+							Pré-visualização
+							<br>
+							<div id="fbBar1" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
+		            			facebook
+			            	</div> 
+						</div>
+						<div id='pat_barra'>
+							<br>
+							<input type='text' style='width:450px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
+							<button id='add-pattern-barra' type="button" class="btn btn-success">
+							  <span class="glyphicon glyphicon-ok"></span>
+							</button>
+							<button id='rm-pattern-barra' type="button" class="btn btn-danger">
+							  <span class="glyphicon glyphicon-remove"></span>
+							</button>
+							<br><br>
+							Pré-visualização
+							<br>
+							<div id="fbBar2" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
+		            			facebook
+			            	</div>
+						</div>
+						<br>
+						<div class="from-group">
+							<b>Fundo:</b>
+							<label>Cor</label>
+							<input type="radio" id="0" name="fundo" value="0">
+							<label>Padrão</label>
+							<input type="radio" id="1" name="fundo" value="1">
+			            </div> 
+						<div id='cor_fundo'>
+							<br>
+							Cor: <input type='color' id="cor-fundo-input">
+							<br>
+						</div>
+						<div id='pat_fundo'>
+							<br>
+							<input type="text" style="width:450px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
+							<button id="add-pattern-fundo" type="button" class="btn btn-success">
+							  <span class="glyphicon glyphicon-ok"></span>
+							</button>
+							<button id="rm-pattern-fundo" type="button" class="btn btn-danger">
+							  <span class="glyphicon glyphicon-remove"></span>
+							</button>
+							<br>
+						</div>
+						<br>
+						<div id='letra'>
+							<b>Letra</b>
+							<br><br>
+							Selecione um tipo
+							<select style="width: 200px" id="letras-list" class="form-control">
+				              <option value="-1"></option>
+				              <option value="0">Armata</option>
+				              <option value="1">Roboto</option>
+				              <option value="2">Happy Monkey</option>
+				              <option value="3">Ledger</option>
+				              <option value="4">Capriola</option>
+				              <option value="5">Ruda</option>
+				              <option value="6">Shadows Into Light Two</option>
+				              <option value="7">Courgette</option>
+				            </select>
+				            <br>
+				            Selecione um tamanho
+							<select style="width: 200px" id="tam-list" class="form-control">
+				              <option value="-1"></option>
+				              <option value="0">10px</option>
+				              <option value="1">12px</option>
+				              <option value="2">14px</option>
+				              <option value="3">16px</option>
+				              <option value="4">18px</option>
+				              <option value="5">20px</option>
+				              <option value="6">22px</option>
+				              <option value="7">24px</option>
+				              <option value="8">28px</option>
+				              <option value="9">32px</option>
+				            </select>
+				            <br>
+				            <button id='add-letra' style="margin-left: 110px; margin-right: 5px" type="button" class="btn btn-success">
+							  <span class="glyphicon glyphicon-ok"></span>
+							</button>
+				            <button id='rm-letra' type="button" class="btn btn-danger">
+							  <span class="glyphicon glyphicon-remove"></span>
+							</button>
+			        	</div>
+					</div>
 				</div>
 			</div>
-		</div>		
+		</div>	
 	</div>
 </body>
 
