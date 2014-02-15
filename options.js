@@ -11,19 +11,22 @@ function getData()
 
 		for (var i = 1; i < allKeys.length; i++) 
 		{
-			var n = allKeys[i].search('id-');
-			var m = allKeys[i].search('atv-');
-			var p = allKeys[i].search('cor-br-');
-			var q = allKeys[i].search('user-actual');
-			var r = allKeys[i].search('color-br-actual');
-			var s = allKeys[i].search('cor_br_user');
-			var t = allKeys[i].search('pat-br-');
-			var u = allKeys[i].search('pat-fd-');
-			var v = allKeys[i].search('cor-fd-');
-			var x = allKeys[i].search('color-fd-actual');
-			var y = allKeys[i].search('cor_fd_user');
+			var a = allKeys[i].search('id-');
+			var b = allKeys[i].search('atv-');
+			var c = allKeys[i].search('cor-br-');
+			var d = allKeys[i].search('user-actual');
+			var e = allKeys[i].search('color-br-actual');
+			var f = allKeys[i].search('cor_br_user');
+			var g = allKeys[i].search('pat-br-');
+			var h = allKeys[i].search('pat-fd-');
+			var j = allKeys[i].search('cor-fd-');
+			var k = allKeys[i].search('color-fd-actual');
+			var l = allKeys[i].search('cor_fd_user');
+			var m = allKeys[i].search('link-lt-');
+			var n = allKeys[i].search('letra-');
+			var o = allKeys[i].search('tam-lt-');
 
-			if(n == -1 && m == -1 && p == -1 && q == -1 && r == -1 && s == -1 && t == -1 && u == -1 && v == -1 && x == -1 && y == -1)
+			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -553,48 +556,60 @@ $(document).ready(function(){
 
 		switch($('#letras-list').val())
 		{
-			case '0': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>";
+			case '0': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Armata&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Armata', sans-serif";
 					  break; 
 
-			case '1':
+			case '1': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Roboto', sans-serif";
+					  break; 
 
-			case '2':
+			case '2': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Happy+Monkey&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Happy Monkey', cursive";
+					  break;
 
-			case '3':
+			case '3': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Ledger&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Ledger', serif";
+					  break;
 
-			case '4':
+			case '4': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Capriola&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Capriola', sans-serif";
+					  break;
 
-			case '5':
+			case '5': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Ruda&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Ruda', sans-serif";
+					  break;
 
-			case '6':
+			case '6': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Shadows Into Light Two', cursive";
+					  break;
 
-			case '7':
+			case '7': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
+					  obj['letra-'+$('#email-actual').text()] = "'Courgette', cursive";
+					  break;
 		}
 
 		switch($('#tam-list').val())
 		{
 			case '0': obj['tam-lt-'+$('#email-actual').text()] = "10px"; break;
 
-			case '1':
+			case '1': obj['tam-lt-'+$('#email-actual').text()] = "12px"; break;
 
-			case '2':
+			case '2': obj['tam-lt-'+$('#email-actual').text()] = "14px"; break;
 
-			case '3':
+			case '3': obj['tam-lt-'+$('#email-actual').text()] = "16px"; break;
 
-			case '4':
+			case '4': obj['tam-lt-'+$('#email-actual').text()] = "18px"; break;
 
-			case '5':
+			case '5': obj['tam-lt-'+$('#email-actual').text()] = "20px"; break;
 
-			case '6':
+			case '6': obj['tam-lt-'+$('#email-actual').text()] = "22px"; break;
 
-			case '7':
+			case '7': obj['tam-lt-'+$('#email-actual').text()] = "24px"; break;
 
-			case '8':
+			case '8': obj['tam-lt-'+$('#email-actual').text()] = "28px"; break;
 
-			case '9':
-
-			case '10':
+			case '9': obj['tam-lt-'+$('#email-actual').text()] = "32px"; break;
 		}  
 
 		chrome.storage.local.set(obj);
@@ -602,6 +617,16 @@ $(document).ready(function(){
 
 	$('#rm-letra').on('click', function() {
 
+		$('#letras-list').val('-1');
+
+		$('#tam-list').val('-1');
+
+		var obj = {};
+
+		obj['letra-'+$('#email-actual').text()] = "'lucida grande',tahoma,verdana,arial,sans-serif";
+		obj['tam-lt-'+$('#email-actual').text()] = "11px";
+
+		chrome.storage.local.set(obj);
 	});
 });
 
@@ -621,6 +646,48 @@ function getCustomData()
 				$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
 				$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
 				$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
+
+				switch(items['letra-'+allKeys[i]])
+				{
+					case "'Armata', sans-serif": $('#letras-list').val('0'); break;
+
+					case "'Roboto', sans-serif": $('#letras-list').val('1'); break;
+
+					case "'Happy Monkey', cursive": $('#letras-list').val('2'); break;
+
+					case "'Ledger', serif": $('#letras-list').val('3'); break;
+
+					case "'Capriola', sans-serif": $('#letras-list').val('4'); break;
+
+					case "'Ruda', sans-serif": $('#letras-list').val('5'); break;
+
+					case "'Shadows Into Light Two', cursive": $('#letras-list').val('6'); break;
+
+					case "'Courgette', cursive": $('#letras-list').val('7'); break;
+				}
+
+				switch(items['tam-lt-'+allKeys[i]])
+				{
+					case '10px': $('#tam-list').val('0'); break;
+
+					case '12px': $('#tam-list').val('1'); break;
+
+					case '14px': $('#tam-list').val('2'); break;
+
+					case '16px': $('#tam-list').val('3'); break;
+
+					case '18px': $('#tam-list').val('4'); break;
+
+					case '20px': $('#tam-list').val('5'); break;
+
+					case '22px': $('#tam-list').val('6'); break;
+
+					case '24px': $('#tam-list').val('7'); break;
+
+					case '28px': $('#tam-list').val('8'); break;
+
+					case '32px': $('#tam-list').val('9'); break;
+				}
 			}
 		}
 	});

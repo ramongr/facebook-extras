@@ -132,9 +132,9 @@ $(document).ready(function()
 		{
 			$('head').append(link_lt);
 
-			$('body').css('font-family', 'Armata');
+			$('body').css('font-family', letra);
 
-			$('body').css('font-size', '12px');
+			$('body').css('font-size', tam_lt);
 		}
 
 		// Se o código for diferente de 0 e se a conta estiver ativa significa que o utilizador está registado e como tal aparece a janela para introduzir o código

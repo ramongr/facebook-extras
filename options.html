@@ -39,6 +39,7 @@
 
 			<br><br>
 			<div class="row-fluid">
+				<div class="col-md-2"></div>
 				<div style="border-right:1px solid #000;height:124px" class="col-md-2">
 					<ul id="Tabs" class="nav nav-pills nav-stacked">
 						<li class="active"><a href="#users" data-toggle="tab">Utilizadores</a></li>
@@ -48,7 +49,7 @@
 				</div>
 
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="users">
+					<div style="margin-left: 30px" class="tab-pane fade in active" id="users">
 						<div class="row">
 							<div style="text-align:right;" class="center-div">
 								<button id="new_user" type="button" class="btn btn-primary">Novo Utilizador</button>
@@ -57,10 +58,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="safety">
+					<div style="margin-left: 30px" class="tab-pane fade" id="safety">
 					</div>
-					<div class="tab-pane fade" id="custom">
+					<div style="margin-left: 30px" class="tab-pane fade" id="custom">
 						<div class="center-div">
+							<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
+							<br><br>
 							<b>Utilizador:</b> <span id="email-actual"></span>
 							<br><br> 
 							<div class="from-group">
@@ -77,11 +80,11 @@
 							</div>
 							<div id='pat_barra'>
 								<br>
-								Padrão: <input type='text' style='width:450px' id='pattern-barra-input'>
-								<button id='add-pattern-barra' type="button" class="btn btn-default">
+								<input type='text' style='width:450px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
+								<button id='add-pattern-barra' type="button" class="btn btn-success">
 								  <span class="glyphicon glyphicon-ok"></span>
 								</button>
-								<button id='rm-pattern-barra' type="button" class="btn btn-default">
+								<button id='rm-pattern-barra' type="button" class="btn btn-danger">
 								  <span class="glyphicon glyphicon-remove"></span>
 								</button>
 								<br>
@@ -101,11 +104,11 @@
 							</div>
 							<div id='pat_fundo'>
 								<br>
-								Padrão: <input type='text' style='width:450px' id='pattern-fundo-input'>
-								<button id='add-pattern-fundo' type="button" class="btn btn-default">
+								<input type="text" style="width:450px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
+								<button id="add-pattern-fundo" type="button" class="btn btn-success">
 								  <span class="glyphicon glyphicon-ok"></span>
 								</button>
-								<button id='rm-pattern-fundo' type="button" class="btn btn-default">
+								<button id="rm-pattern-fundo" type="button" class="btn btn-danger">
 								  <span class="glyphicon glyphicon-remove"></span>
 								</button>
 								<br>
@@ -115,20 +118,20 @@
 								<b>Letra</b>
 								<br><br>
 								Selecione um tipo
-								<select id="letras-list" class="form-control">
+								<select style="width: 200px" id="letras-list" class="form-control">
 					              <option value="-1"></option>
 					              <option value="0">Armata</option>
 					              <option value="1">Roboto</option>
 					              <option value="2">Happy Monkey</option>
 					              <option value="3">Ledger</option>
 					              <option value="4">Capriola</option>
-					              <option value="5">Macondo</option>
+					              <option value="5">Ruda</option>
 					              <option value="6">Shadows Into Light Two</option>
-					              <option value="7">Damion</option>
+					              <option value="7">Courgette</option>
 					            </select>
 					            <br>
 					            Selecione um tamanho
-								<select id="tam-list" class="form-control">
+								<select style="width: 200px" id="tam-list" class="form-control">
 					              <option value="-1"></option>
 					              <option value="0">10px</option>
 					              <option value="1">12px</option>
@@ -142,11 +145,11 @@
 					              <option value="9">32px</option>
 					            </select>
 					            <br>
-					            <button id='rm-letra' type="button" class="btn btn-default pull-right">
-								  <span class="glyphicon glyphicon-remove"></span>
-								</button>
-					            <button id='add-letra' style="margin-right: 5px" type="button" class="btn btn-default pull-right">
+					            <button id='add-letra' style="margin-left: 110px; margin-right: 5px" type="button" class="btn btn-success">
 								  <span class="glyphicon glyphicon-ok"></span>
+								</button>
+					            <button id='rm-letra' type="button" class="btn btn-danger">
+								  <span class="glyphicon glyphicon-remove"></span>
 								</button>
 				        	</div>
 						</div>
