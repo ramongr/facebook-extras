@@ -400,6 +400,7 @@ function teste()
 	console.log(_.isEqual(a, c));
 }*/
 
+
 $(document).ready(function(){
 
 	$('#cor_barra').hide();
@@ -692,6 +693,23 @@ function getCustomData()
 		}
 	});
 }
+
+$('.nav-tabs a').click(function (e) {
+	e.preventDefault();
+	$(this).tab('show');
+});
+
+$('#Tabs a[href="#users"]').click(function() {
+
+});
+
+$('#Tabs a[href="#safety"]').click(function() {
+
+});
+
+$('#Tabs a[href="#custom"]').click(function() {
+
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
