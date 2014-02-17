@@ -1,6 +1,6 @@
 $(document).ready(function() 
 {
-  	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null;
+  	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null, pin = null;
 
   	//Obter o id de utilizador através do cookie
 
@@ -88,82 +88,87 @@ $(document).ready(function()
 				link_lt = items['link-lt-'+allKeys[i]];
 				letra = items['letra-'+allKeys[i]];
 				tam_lt = items['tam-lt-'+allKeys[i]];
+
+				pin = items['pin-switch-'+allKeys[i]];
 			}
 		}
 
-		if(atv == 0)
+		//Se não existir um código, não existe nenhuma conta para o utilizador atual. Vamos guardar o seu id para o caso de o utilizador querer criar uma conta.
+
+		if(_.isEmpty(codigo) == true)
 		{
-			if(cor_br != null)
+			var obj = {};
+
+		    obj['c_user'] = id;
+		    obj['cor_br_user'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
+		    obj['cor_fd_user'] = rgb2hex($('body').css('background-color'));
+
+			chrome.storage.local.set(obj);
+		}
+		else
+		{
+			if(atv == 0)
 			{
-				$('#blueBar.fixed_elem').css({
-					'background-image': 'none',
-					'background-color': cor_br
-				});
-			}
-			else
-			{
-				if(pat_br != null)
+				if(cor_br != null)
 				{
-					$('#blueBar.fixed_elem').css('background-image', 'url(' + pat_br + ')');
+					$('#blueBar.fixed_elem').css({
+						'background-image': 'none',
+						'background-color': cor_br
+					});
 				}
-			}
-
-			if(cor_fd != null)
-			{
-				$('body').css({
-					'background-image': 'none',
-					'background-color': cor_fd
-				});
-
-				$('#leftCol').css({
-					'background-image': 'none',
-					'background-color': 'white'
-				});
-			}
-			else
-			{
-				if(pat_fd != null)
+				else
 				{
-					$('body').css('background-image', 'url(' + pat_fd + ')');
-
-					$('#leftCol').css('background-color', 'white');
+					if(pat_br != null)
+					{
+						$('#blueBar.fixed_elem').css('background-image', 'url(' + pat_br + ')');
+					}
 				}
-			}
 
-			if(link_lt != null)
-			{
-				$('head').append(link_lt);
-
-				$('body').css('font-family', letra);
-
-				$('body').css('font-size', tam_lt);
-			}
-
-			// Se o código for diferente de 0 e se a conta estiver ativa significa que o utilizador está registado e como tal aparece a janela para introduzir o código
-
-			if(_.isEmpty(codigo) == false)
-			{
-				$('._42ft.selected')
-					.attr('type', 'button')
-					.on('click',function() {
-
-						code_input();
-
-				});
-			}
-			else
-			{
-				//Se não existir um código, não existe nenhuma conta para o utilizador atual. Vamos guardar o seu id para o caso de o utilizador querer criar uma conta.
-
-				if(_.isEmpty(codigo) == true)
+				if(cor_fd != null)
 				{
-					var obj = {};
+					$('body').css({
+						'background-image': 'none',
+						'background-color': cor_fd
+					});
 
-				    obj['c_user'] = id;
-				    obj['cor_br_user'] = rgb2hex($('#blueBar.fixed_elem').css('background-color'));
-				    obj['cor_fd_user'] = rgb2hex($('body').css('background-color'));
+					$('#leftCol').css({
+						'background-image': 'none',
+						'background-color': 'white'
+					});
+				}
+				else
+				{
+					if(pat_fd != null)
+					{
+						$('body').css('background-image', 'url(' + pat_fd + ')');
 
-					chrome.storage.local.set(obj);
+						$('#leftCol').css('background-color', 'white');
+					}
+				}
+
+				if(link_lt != null)
+				{
+					$('head').append(link_lt);
+
+					$('body').css('font-family', letra);
+
+					$('body').css('font-size', tam_lt);
+				}
+
+				if(pin == 1)
+				{
+					// Se o código for diferente de 0 significa que o utilizador está registado e como tal aparece a janela para introduzir o código
+
+					if(_.isEmpty(codigo) == false)
+					{
+						$('._42ft.selected')
+							.attr('type', 'button')
+							.on('click',function() {
+
+								code_input();
+
+						});
+					}
 				}
 			}
 		}
