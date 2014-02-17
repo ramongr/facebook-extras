@@ -413,6 +413,8 @@ $(document).ready(function(){
 		$(this).tab('show');
 	});
 
+	$('#pin-switch').bootstrapSwitch();
+	
 	var c = document.getElementById("cor-barra-input");
 
 	c.addEventListener("input", function() {

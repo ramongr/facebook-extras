@@ -5,12 +5,14 @@
 	<title>Facebook Guardian</title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./bootstrap-switch.css">
 	<link rel="stylesheet" type="text/css" href="./buttons.css" />
 	
 	<script src="jquery-2.0.3.js"></script>
 	<script src="jquery-2.0.3.min.js"></script>
 	<script src="bootstrap.min.js"></script>
 	<script src="bootbox.min.js"></script>
+	<script src="bootstrap-switch.js"></script>
 	<script src="options.js"></script>
 	<script src="sha3.js"></script>
 	<script src="lodash.min.js"></script>
@@ -58,6 +60,9 @@
 					</div>
 				</div>
 				<div style="margin-left: 30px" class="tab-pane fade" id="safety">
+					<div class="center-div">
+						<b>Pedir sempre PIN:</b> <input data-size="small" id="pin-switch" type="checkbox" checked>
+					</div>
 				</div>
 				<div style="margin-left: 30px" class="tab-pane fade" id="custom">
 					<div class="center-div">
