@@ -1,6 +1,6 @@
 $(document).ready(function() 
 {
-  	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null, pin = null;
+  	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null, pin = null, words = null;
 
   	//Obter o id de utilizador através do cookie
 
@@ -64,7 +64,6 @@ $(document).ready(function()
 		}
     }
 
-
 	//Vamos obter todos os users guardados e comparar o seu id com o id da sessão actual. Se não existir vamos guardar o id através do chrome storage para a possibilidade ser criada uma nova conta com esse id
 
 	chrome.storage.local.get(null, function(items) {
@@ -90,6 +89,8 @@ $(document).ready(function()
 				tam_lt = items['tam-lt-'+allKeys[i]];
 
 				pin = items['pin-switch-'+allKeys[i]];
+
+				words = items['words-switch-'+allKeys[i]];
 			}
 		}
 
@@ -157,18 +158,19 @@ $(document).ready(function()
 
 				if(pin == 1)
 				{
-					// Se o código for diferente de 0 significa que o utilizador está registado e como tal aparece a janela para introduzir o código
+					$('._42ft.selected')
+						.attr('type', 'button')
+						.on('click',function() {
 
-					if(_.isEmpty(codigo) == false)
-					{
-						$('._42ft.selected')
-							.attr('type', 'button')
-							.on('click',function() {
-
+							if(words == 0)
+							{
+								
+							}
+							else
+							{
 								code_input();
-
-						});
-					}
+							}
+					});
 				}
 			}
 		}

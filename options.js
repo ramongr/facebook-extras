@@ -26,8 +26,9 @@ function getData()
 			var n = allKeys[i].search('letra-');
 			var o = allKeys[i].search('tam-lt-');
 			var p = allKeys[i].search('pin-switch-');
+			var q = allKeys[i].search('words-switch-');
 
-			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1)
+			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1 && q == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -158,6 +159,7 @@ function clickHandler(e)
 										obj['cor-br-'+email] = result['cor_br_user'];
 										obj['cor-fd-'+email] = result['cor_fd_user'];
 										obj['pin-switch-'+email] = 1;
+										obj['words-switch-'+email] = 1;
 
 										chrome.storage.local.set(obj);
 
@@ -402,7 +404,6 @@ function teste()
 	console.log(_.isEqual(a, c));
 }*/
 
-
 $(document).ready(function(){
 
 	$('#cor_barra').hide();
@@ -432,6 +433,28 @@ $(document).ready(function(){
 			var obj = {};
 
             obj['pin-switch-'+$('#email-actual').text()] = 0;
+
+			chrome.storage.local.set(obj);
+		}
+	});
+
+	$('#words-switch').bootstrapSwitch();
+	
+	$('#words-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			var obj = {};
+
+            obj['words-switch-'+$('#email-actual').text()] = 1;
+
+			chrome.storage.local.set(obj);
+		}
+		else
+		{
+			var obj = {};
+
+            obj['words-switch-'+$('#email-actual').text()] = 0;
 
 			chrome.storage.local.set(obj);
 		}
@@ -722,9 +745,16 @@ function getCustomData()
 
 				switch(items['pin-switch-'+allKeys[i]])
 				{
-					case '0': $('#pin-switch').bootstrapSwitch('state', false); break;
+					case 0: $('#pin-switch').bootstrapSwitch('state', false); break;
 
-					case '1': $('#pin-switch').bootstrapSwitch('state', true); break;
+					case 1: $('#pin-switch').bootstrapSwitch('state', true); break;
+				}
+
+				switch(items['words-switch-'+allKeys[i]])
+				{
+					case 0: $('#words-switch').bootstrapSwitch('state', false); break;
+
+					case 1: $('#words-switch').bootstrapSwitch('state', true); break;
 				}
 			}
 		}
