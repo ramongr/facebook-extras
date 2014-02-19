@@ -19,6 +19,8 @@ $(document).ready(function()
         	id = c.substring(cookie.length,c.length);
     }
 
+    //Grava os detalhes sobre o utilizador actual do facebook
+
     var obj = {};
 
     obj['user-actual'] = id;
@@ -27,6 +29,40 @@ $(document).ready(function()
 
 	chrome.storage.local.set(obj);
 
+	//Função para obter um hash code de uma string
+
+	String.prototype.hashCode = function() {
+
+	    if (Array.prototype.reduce)
+	    {
+	        return this.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+	    } 
+
+	    var hash = 0;
+
+	    if (this.length === 0) 
+	    	return hash;
+
+	    for (var i = 0; i < this.length; i++) 
+	    {
+	        var character  = this.charCodeAt(i);
+
+	        hash  = ((hash<<5)-hash)+character;
+	        hash = hash & hash; // Convert to 32bit integer
+	    }
+	    
+	    return hash;
+	}
+
+	//Array com as palavras banidas
+
+	ban_words = new Array();
+
+	ban_words[("teste").hashCode()] = "teste";
+	ban_words[("adeus").hashCode()] = "adeus";
+
+
+	//Função que cria a janela para a introdução do código do utilizador
 
     function code_input()
     {
@@ -108,8 +144,12 @@ $(document).ready(function()
 		}
 		else
 		{
+			//Se a conta estiver activa, então vamos carregar todos os detalhes da conta do utilizador
+
 			if(atv == 0)
 			{
+				//Verificar se existe uma nova cor ou uma imagem para a barra de topo do facebook
+
 				if(cor_br != null)
 				{
 					$('#blueBar.fixed_elem').css({
@@ -124,6 +164,8 @@ $(document).ready(function()
 						$('#blueBar.fixed_elem').css('background-image', 'url(' + pat_br + ')');
 					}
 				}
+
+				//Verificar se existe uma nova cor ou uma imagem para o fundo do facebook
 
 				if(cor_fd != null)
 				{
@@ -147,6 +189,8 @@ $(document).ready(function()
 					}
 				}
 
+				//Verificar se existe um novo tipo de letra para o facebook
+
 				if(link_lt != null)
 				{
 					$('head').append(link_lt);
@@ -156,23 +200,48 @@ $(document).ready(function()
 					$('body').css('font-size', tam_lt);
 				}
 
+				//Verificar se o utilizador escolheu a opção de pedir sempre o código
+
 				if(pin == 1)
 				{
 					$('._42ft.selected')
 						.attr('type', 'button')
 						.on('click',function() {
 
+							//Verificar se o utilizador escolheu a opção para proibir certas palavras na publicação de textos
+
 							if(words == 0)
 							{	
-								$.ajax({
-								    url: "http://localhost/chrome_dev/facebook-extras/check_text.php",
-								    type: "POST",
-								    data: {text: $('#u_0_1i').val()}
-								})
-							    .done(function(result) {
+								var text = $('#u_0_1i').val();
 
-							        console.log(result);
-								});
+								var res = text.split(" ");
+
+								banned = new Array();
+								var j = 0;
+
+								for(var i = 0; i < res.length; i++)
+								{
+									var hash = res[i].hashCode();
+
+									if(ban_words[hash])
+									{
+										banned[j] = ban_words[hash];
+										j++;
+									}
+								}
+
+								//Se existir alguma palavra proibida na publicação, o utilizador é aviso para as remover
+
+								if(_.isEmpty(banned) == false)
+								{
+									bootbox.alert("<div><b style='font-size: 12px'>Não é possível publicar o texto inserido.</b><br><br>Para proceder deve apagar as seguintes palavras da sua publicação: <br><br><span id='ban'></span></div>").find('.modal-content').css("width", "400px");
+									
+									$('#ban').text(banned);
+								}
+								else
+								{
+									code_input();
+								}
 							}
 							else
 							{

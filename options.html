@@ -18,6 +18,7 @@
 	<script src="lodash.min.js"></script>
 	<script src="jquery.translate.js"></script>
 	<script src="lang.js"></script>
+	<script type="text/javascript" src="./jscolor/jscolor.js"></script>
 
 </head>
 
@@ -26,22 +27,12 @@
 	<br>
 	<div class="content">
 
-	<!--<div class="dropdown">
-	<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-	<h4 class="title">Idioma <span class="caret"></span></h4>
-	</a>
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	<li><a href="#">Português</a></li>
-	<li><a href="#">Inglês</a></li>
-	</ul>
-	</div>-->
-
 		<h3 class='title text-center'><b>Opções</b></h3>
 
 		<br><br>
 		<div class="row-fluid">
-			<div class="col-md-2"></div>
-			<div style="border-right:1px solid #000;height:124px" class="col-md-2">
+			<div class="col-md-1"></div>
+			<div style="height: 400px" class="col-md-2">
 				<ul id="Tabs" class="nav nav-pills nav-stacked">
 					<li class="active"><a href="#users" data-toggle="tab">Utilizadores</a></li>
 					<li><a href="#safety" data-toggle="tab">Segurança</a></li>
@@ -61,6 +52,8 @@
 				</div>
 				<div style="margin-left: 20px" class="tab-pane fade" id="safety">
 					<div class="center-div">
+						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
+						<br><br>
 						<b>Utilizador:</b> <span id="email-actual"></span>
 						<br><br>
 						<b>Pedir sempre código:</b> <input data-size="small" id="pin-switch" type="checkbox">
@@ -83,15 +76,24 @@
 			            </div> 
 						<div id='cor_barra'>
 							<br>
-							Cor: <input type='color' id="cor-barra-input">
-							<br><br>
 							Pré-visualização
 							<br>
 							<div id="fbBar1" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
 		            			facebook
-			            	</div> 
+			            	</div>
+							<br>
+							Cor: <input class="color" id="cor-barra-input">
+							<button id='rm-cor-barra' type="button" class="btn btn-danger">
+							  <span class="glyphicon glyphicon-remove"></span>
+							</button> 
 						</div>
 						<div id='pat_barra'>
+							<br>
+							Pré-visualização
+							<br>
+							<div id="fbBar2" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
+		            			facebook
+			            	</div>
 							<br>
 							<input type='text' style='width:450px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
 							<button id='add-pattern-barra' type="button" class="btn btn-success">
@@ -100,12 +102,6 @@
 							<button id='rm-pattern-barra' type="button" class="btn btn-danger">
 							  <span class="glyphicon glyphicon-remove"></span>
 							</button>
-							<br><br>
-							Pré-visualização
-							<br>
-							<div id="fbBar2" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
-		            			facebook
-			            	</div>
 						</div>
 						<br>
 						<div class="from-group">
@@ -117,7 +113,10 @@
 			            </div> 
 						<div id='cor_fundo'>
 							<br>
-							Cor: <input type='color' id="cor-fundo-input">
+							Cor: <input class="color" id="cor-fundo-input">
+							<button id='rm-cor-fundo' type="button" class="btn btn-danger">
+							  <span class="glyphicon glyphicon-remove"></span>
+							</button>
 							<br>
 						</div>
 						<div id='pat_fundo'>

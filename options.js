@@ -52,7 +52,6 @@ function getData()
 
 		document.getElementById('table-print').innerHTML = table;
 
-		//$('button#new-code').tooltip('hide');
 		$('button#edit').tooltip('hide');
 		$('button#remove').tooltip('hide');
 		$('button#on').tooltip('hide');
@@ -94,15 +93,6 @@ function getData()
 
 			editUser(mail);
 		});
-
-		/*$('button#new-code').on('click',function(){
-			
-			var td = $(this).closest('td').parent()[0];
-
-			var mail = td.getElementsByTagName('td')[1].innerHTML;
-
-			recoverCode(mail);
-		});*/
 	});
 	
 }
@@ -270,39 +260,6 @@ function editUser(Email)
 	});	
 }
 
-/*function sendMail(Email, Code) 
-{
-	var param = {
-            "email": Email,
-            "code": Code
-    };
-
-    $.ajax({
-        url: 'http://megajpc.net23.net/Email.php',
-        data: param,
-        type: 'POST',
-        success: function (data) {}
-    });
-}
-
-function recoverCode(Email)
-{
-	//bootbox.confirm("<div class='text'><b>Caso não se recorde do seu código, é possível receber um novo através do E-mail registado.<br><br>Deseja continuar?</b></div>", function(result) {
-
-		var code = Math.floor((Math.random()*1000000)+1);
-
-		var obj = {};
-
-        obj[Email] = CryptoJS.SHA3(code.toString());
-
-		//chrome.storage.local.set(obj);
-
-		//sendMail(Email, code);
-
-		//bootbox.alert("<br><div class='text'><b></b></div>");
-	//});
-}*/
-
 function User_ON(Email)
 {
 	bootbox.confirm("<form role='form'>																																																  <div class='text'><b>Introduza o seu código.</b></div><br>																																					      <div class='form-group'>																																													          <input style='width: 300px;' type='password' class='form-control' id='Password'>																																	  </div></form>", function (result) {
@@ -361,50 +318,7 @@ function User_OFF(Email)
 	});
 }
 
-
-//Funções para testes
-
-/*function setData()
-{
-	chrome.storage.local.set({'megajpc': '123'});
-	chrome.storage.local.set({'ramon': '456'});
-	chrome.storage.local.set({'sandra': '789'});
-	chrome.storage.local.set({'sofia': '0'});
-}
-
-function returnData(Email)
-{
-	chrome.storage.local.get(Email, function (result) {
-
-		console.log(Email, result[Email]);
-	});
-}
-
-function getAll()
-{
-	chrome.storage.local.get(null, function(items) {
-
-	    var allKeys = Object.keys(items);
-
-	    for (var i = 0; i < allKeys.length; i++) 
-		{
-			console.log(i + ", " + allKeys[i] + ", " + items[allKeys[i]] + ", " + items['id-'+allKeys[i]] + ", " + items['atv-'+allKeys[i]]);
-		}
-
-	});
-}
-
-function teste()
-{
-	var a = CryptoJS.SHA3('123');
-	var b = CryptoJS.SHA3('456');
-	var c = CryptoJS.SHA3('123');
-
-	console.log(_.isEqual(a, b));
-	console.log(_.isEqual(a, c));
-}*/
-
-$(document).ready(function(){
+$(document).ready(function() {
 
 	$('#cor_barra').hide();
 	$('#pat_barra').hide();
@@ -462,35 +376,32 @@ $(document).ready(function(){
 
 	var c = document.getElementById("cor-barra-input");
 
-	c.addEventListener("input", function() {
+	c.addEventListener("change", function() {
 
-		if(c.value)
-		{
-			chrome.storage.local.get(null, function(items) {
+        chrome.storage.local.get(null, function(items) {
 
-			    var allKeys = Object.keys(items);
+		    var allKeys = Object.keys(items);
 
-			    for (var i = 1; i < allKeys.length; i++) 
+		    for (var i = 1; i < allKeys.length; i++) 
+			{
+				if(items['id-'+allKeys[i]] == items['user-actual'])
 				{
-					if(items['id-'+allKeys[i]] == items['user-actual'])
-					{
-						var obj = {};
+					var obj = {};
 
-		                obj['cor-br-'+allKeys[i]] = $('#cor-barra-input').val();
+	                obj['cor-br-'+allKeys[i]] = '#'+$('#cor-barra-input').val();
 
-		                obj['pat-br-'+allKeys[i]] = null;
+	                obj['pat-br-'+allKeys[i]] = null;
 
-		                $('#fbBar1').css('background-color', $('#cor-barra-input').val());
+	                $('#fbBar1').css('background-color', '#'+$('#cor-barra-input').val());
 
-		                $('#pattern-barra-input').val('');
+	                $('#pattern-barra-input').val('');
 
-						chrome.storage.local.set(obj);
-					}
+					chrome.storage.local.set(obj);
 				}
-			});
-		}
+			}
+		});
 
-	}, false); 
+	}, false);
 
 	$('#add-pattern-barra').on('click', function() {
 
@@ -520,6 +431,21 @@ $(document).ready(function(){
 
 	});
 
+	$('#rm-cor-barra').on('click', function() {
+
+		var obj = {};
+
+        obj['cor-br-'+$('#email-actual').text()] = "#3b5998";
+
+        $('#fbBar1').css({'background-image': 'none', 'background-color': '#3b5998'});
+
+        $('#cor-barra-input').val("#3b5998");
+        $('#cor-barra-input').css("background-color", "#3b5998");
+
+		chrome.storage.local.set(obj);
+
+	});
+
 	$("input[name='barra']").on('click', function() {
 
 		if($("input[name='barra']:checked").val() == 0)
@@ -537,7 +463,7 @@ $(document).ready(function(){
 
 	var d = document.getElementById("cor-fundo-input");
 
-	d.addEventListener("input", function() {
+	d.addEventListener("change", function() {
 
 		if(d.value)
 		{
@@ -551,7 +477,7 @@ $(document).ready(function(){
 					{
 						var obj = {};
 
-		                obj['cor-fd-'+allKeys[i]] = $('#cor-fundo-input').val();
+		                obj['cor-fd-'+allKeys[i]] = '#'+$('#cor-fundo-input').val();
 
 		                obj['pat-fd-'+allKeys[i]] = null;
 
@@ -584,6 +510,19 @@ $(document).ready(function(){
         obj['pat-fd-'+$('#email-actual').text()] = null;
 
         $('#pattern-fundo-input').val('');
+
+		chrome.storage.local.set(obj);
+
+	});
+
+	$('#rm-cor-fundo').on('click', function() {
+
+		var obj = {};
+
+        obj['cor-fd-'+$('#email-actual').text()] = "#FFFFFF";
+
+        $('#cor-fundo-input').val("#FFFFFF");
+        $('#cor-fundo-input').css("background-color", "#FFFFFF");
 
 		chrome.storage.local.set(obj);
 
@@ -696,11 +635,55 @@ function getCustomData()
 			if(items['id-'+allKeys[i]] == items['user-actual'])
 			{
 				$('#email-actual').text(allKeys[i]);
-				$('#cor-barra-input').val(items['cor-br-'+allKeys[i]]);
-				$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
-				$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
-				$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
 
+				if(items['cor-br-'+allKeys[i]])
+				{
+					$('#cor-barra-input').val(items['cor-br-'+allKeys[i]]);
+					$('#cor-barra-input').css("background-color", items['cor-br-'+allKeys[i]]);
+
+					$('#fbBar1').css({'background-image': 'none', 'background-color': items['cor-br-'+allKeys[i]]});
+				}
+				else
+				{
+					$('#cor-barra-input').val("#3b5998");
+					$('#cor-barra-input').css("background-color", "#3b5998");
+
+					$('#fbBar1').css({'background-image': 'none', 'background-color': "#3b5998"});
+				}
+				
+				if(items['pat-br-'+allKeys[i]])
+				{
+					$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
+
+					$('#fbBar2').css('background-image', 'url(' + items['pat-br-'+allKeys[i]] + ')');
+				}
+				else
+				{
+					$('#pattern-barra-input').val('');
+
+					$('#fbBar2').css({'background-image': 'none', 'background-color': "#3b5998"});
+				}
+				
+				if(items['cor-fd-'+allKeys[i]])
+				{
+					$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
+					$('#cor-fundo-input').css('background-color', items['cor-fd-'+allKeys[i]]);
+				}
+				else
+				{
+					$('#cor-fundo-input').val("#FFFFFF");
+					$('#cor-fundo-input').css('background-color', "#FFFFFF");
+				}
+				
+				if(items['pat-fd-'+allKeys[i]])
+				{
+					$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
+				}
+				else
+				{
+					$('#pattern-fundo-input').val('');
+				}
+				
 				switch(items['letra-'+allKeys[i]])
 				{
 					case "'Armata', sans-serif": $('#letras-list').val('0'); break;
@@ -761,27 +744,9 @@ function getCustomData()
 	});
 }
 
-$('.nav-tabs a').click(function (e) {
-	e.preventDefault();
-	$(this).tab('show');
-});
-
-$('#Tabs a[href="#users"]').click(function() {
-
-});
-
-$('#Tabs a[href="#safety"]').click(function() {
-
-});
-
-$('#Tabs a[href="#custom"]').click(function() {
-
-});
-
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('button').addEventListener('click', clickHandler);
   getData();
   getCustomData();
-  //getAll();
 });
 	
