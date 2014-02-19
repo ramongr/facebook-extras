@@ -163,8 +163,16 @@ $(document).ready(function()
 						.on('click',function() {
 
 							if(words == 0)
-							{
-								
+							{	
+								$.ajax({
+								    url: "http://localhost/chrome_dev/facebook-extras/check_text.php",
+								    type: "POST",
+								    data: {text: $('#u_0_1i').val()}
+								})
+							    .done(function(result) {
+
+							        console.log(result);
+								});
 							}
 							else
 							{
