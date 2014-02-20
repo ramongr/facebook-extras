@@ -6,7 +6,8 @@ function getData()
 
 	    var table = "<table id='tb' class='text table table-striped'>";
 
-		table += "<tr>																																																		  <td style='text-align: center;'><b> # </b></td>																																					              <td style='text-align: center;'><b> E-Mail </b></td>																													              <td style='text-align: center;'><b> Edição </b></td>																																				  </tr>"
+		table += "<tr>																																																		  <td style='width: 50; text-align: center;'><b> # </b></td>																																					              <td style='width: 350px; text-align: center;'><b> E-Mail </b></td>																													              <td style='width: 200px; text-align: center;'><b> Edição </b></td>																																				  </tr>"
+
 		var index = 1;
 
 		for (var i = 1; i < allKeys.length; i++) 
@@ -374,6 +375,38 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#barra-switch').bootstrapSwitch();
+	
+	$('#barra-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			$('#cor_barra').show();
+			$('#pat_barra').hide();
+		}
+		else
+		{
+			$('#cor_barra').hide();
+			$('#pat_barra').show();
+		}
+	});
+
+	$('#fundo-switch').bootstrapSwitch();
+	
+	$('#fundo-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			$('#cor_fundo').show();
+			$('#pat_fundo').hide();
+		}
+		else
+		{
+			$('#cor_fundo').hide();
+			$('#pat_fundo').show();
+		}
+	});
+
 	var c = document.getElementById("cor-barra-input");
 
 	c.addEventListener("change", function() {
@@ -446,21 +479,6 @@ $(document).ready(function() {
 
 	});
 
-	$("input[name='barra']").on('click', function() {
-
-		if($("input[name='barra']:checked").val() == 0)
-		{
-			$('#cor_barra').show();
-			$('#pat_barra').hide();
-		}
-
-		if($("input[name='barra']:checked").val() == 1)
-		{
-			$('#pat_barra').show();
-			$('#cor_barra').hide();
-		}
-	});
-
 	var d = document.getElementById("cor-fundo-input");
 
 	d.addEventListener("change", function() {
@@ -526,21 +544,6 @@ $(document).ready(function() {
 
 		chrome.storage.local.set(obj);
 
-	});
-
-	$("input[name='fundo']").on('click', function() {
-
-		if($("input[name='fundo']:checked").val() == 0)
-		{
-			$('#cor_fundo').show();
-			$('#pat_fundo').hide();
-		}
-
-		if($("input[name='fundo']:checked").val() == 1)
-		{
-			$('#pat_fundo').show();
-			$('#cor_fundo').hide();
-		}
 	});
 
 	$('#add-letra').on('click', function() {
@@ -634,7 +637,7 @@ function getCustomData()
 		{
 			if(items['id-'+allKeys[i]] == items['user-actual'])
 			{
-				$('#email-actual').text(allKeys[i]);
+				$('span#email-actual').text(allKeys[i]);
 
 				if(items['cor-br-'+allKeys[i]])
 				{

@@ -6,11 +6,14 @@
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./bootstrap-switch.css">
+	<link rel="stylesheet" href="./bootstrap.css">
+	<link rel="stylesheet" href="./simple-sidebar.css">
 	<link rel="stylesheet" type="text/css" href="./buttons.css" />
 	
 	<script src="jquery-2.0.3.js"></script>
 	<script src="jquery-2.0.3.min.js"></script>
 	<script src="bootstrap.min.js"></script>
+	<script src="bootstrap.js"></script>
 	<script src="bootbox.min.js"></script>
 	<script src="bootstrap-switch.js"></script>
 	<script src="options.js"></script>
@@ -24,34 +27,43 @@
 
 <body>
 	
-	<br>
-	<div class="content">
+	<div id="wrapper">
 
-		<h3 class='title text-center'><b>Opções</b></h3>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                	<a href="#">Facebook Extras</a>
+                </li>
+                <li class="active">
+                	<a href="#users" data-toggle="tab">Utilizadores</a>
+                </li>
+                <li>
+                	<a href="#safety" data-toggle="tab">Segurança</a>
+                </li>
+                <li>
+                	<a href="#custom" data-toggle="tab">Personalizar</a>
+                </li>
+                <li>
+                	<a href="#help" data-toggle="tab">Ajuda</a>
+                </li>
+            </ul>
+        </div>
 
-		<br><br>
-		<div class="row-fluid">
-			<div class="col-md-1"></div>
-			<div style="height: 400px" class="col-md-2">
-				<ul id="Tabs" class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#users" data-toggle="tab">Utilizadores</a></li>
-					<li><a href="#safety" data-toggle="tab">Segurança</a></li>
-					<li><a href="#custom" data-toggle="tab">Personalizar</a></li>
-				</ul>
-			</div>
-
-			<div class="tab-content">
-				<div style="margin-left: 20px" class="tab-pane fade in active" id="users">
-					<div class="row">
-						<div style="text-align:right;" class="center-div">
-							<button id="new_user" type="button" class="btn btn-primary">Novo Utilizador</button>
-							<br><br>
-							<div class="text-center" id='table-print'></div>
-						</div>
-					</div>
-				</div>
-				<div style="margin-left: 20px" class="tab-pane fade" id="safety">
-					<div class="center-div">
+        <div id="page-content-wrapper" class="tab-content">
+            <div id="users" class="tab-pane fade in active">
+                <div class="row">
+                	<br><br>
+                    <div class="center-div">
+						<button id="new_user" type="button" class="btn btn-primary pull-right">Novo Utilizador</button>
+						<br><br>
+						<div class="text-center" id='table-print'></div>
+                    </div>
+                </div>
+            </div>
+            <div id="safety" class="tab-pane fade">
+                <div class="row">
+                	<br><br>
+                    <div class="center-div">
 						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
 						<br><br>
 						<b>Utilizador:</b> <span id="email-actual"></span>
@@ -60,20 +72,19 @@
 						<br><br>
 						<b>Permitir palavras obscenas:</b> <input data-size="small" id="words-switch" type="checkbox">
 					</div>
-				</div>
-				<div style="margin-left: 20px" class="tab-pane fade" id="custom">
-					<div class="center-div">
+                </div>
+            </div>
+            <div id="custom" class="tab-pane fade">
+            	<div class="row">
+	            	<br><br>
+	            	<div class="center-div">
 						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
 						<br><br>
 						<b>Utilizador:</b> <span id="email-actual"></span>
 						<br><br> 
-						<div class="from-group">
-							<b>Barra no topo:</b>
-							<label>Cor</label>
-							<input type="radio" id="0" name="barra" value="0">
-							<label>Padrão</label>
-							<input type="radio" id="1" name="barra" value="1">
-			            </div> 
+						<b>Barra no topo:</b>
+						<input data-size="small" id="barra-switch" type="checkbox" checked data-on-text="Cor" data-off-text="Padrão">
+						<br>
 						<div id='cor_barra'>
 							<br>
 							Pré-visualização
@@ -104,13 +115,9 @@
 							</button>
 						</div>
 						<br>
-						<div class="from-group">
-							<b>Fundo:</b>
-							<label>Cor</label>
-							<input type="radio" id="0" name="fundo" value="0">
-							<label>Padrão</label>
-							<input type="radio" id="1" name="fundo" value="1">
-			            </div> 
+						<b>Fundo:</b>
+						<input data-size="small" id="fundo-switch" type="checkbox" checked data-on-text="Cor" data-off-text="Padrão"> 
+						<br>
 						<div id='cor_fundo'>
 							<br>
 							Cor: <input class="color" id="cor-fundo-input">
@@ -171,9 +178,10 @@
 			        	</div>
 					</div>
 				</div>
-			</div>
-		</div>	
-	</div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
