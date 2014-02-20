@@ -8,7 +8,7 @@
 .text
 {
 	font-family: 'Roboto', sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 .buttons-left-middle 
@@ -55,4 +55,53 @@
 	height: 32px;
 	background-color: #3b5998;
 	width: 300px;
+	font-size: 16px; 
+	font-weight: bold; 
+	color: white; 
+	font-family: tahoma;
+}
+
+.add:hover,
+.add:focus,
+.add{
+	background-color: #2980b9; 
+	border-color: #2980b9;
+	color: white;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.rm:hover,
+.rm:focus,
+.rm{
+	background-color: #7f8c8d; 
+	border-color: #7f8c8d;
+	color: white;
+}
+
+.info:hover,
+.info:focus,
+.info{
+	background-color: #f39c12;
+	border-color: #f39c12;
+	color: white;
+}
+
+.on:hover,
+.on:focus,
+.on{
+	background-color: #27ae60;
+	border-color: #27ae60;
+	color: white;
+}
+
+.off:hover,
+.off:focus,
+.off{
+	background-color: #c0392b;
+	border-color: #c0392b;
+	color: white;
 }

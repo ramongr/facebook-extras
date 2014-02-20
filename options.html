@@ -66,11 +66,11 @@
                     <div class="center-div">
 						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
 						<br><br>
-						<b>Utilizador:</b> <span id="email-actual"></span>
+						<b >Utilizador:</b> <span id="email-actual"></span>
 						<br><br>
 						<b>Pedir sempre código:</b> <input data-size="small" id="pin-switch" type="checkbox">
 						<br><br>
-						<b>Permitir palavras obscenas:</b> <input data-size="small" id="words-switch" type="checkbox">
+						<b>Bloquear palavras obscenas:</b> <input data-size="small" id="words-switch" type="checkbox">
 					</div>
                 </div>
             </div>
@@ -89,12 +89,12 @@
 							<br>
 							Pré-visualização
 							<br>
-							<div id="fbBar1" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
+							<div id="fbBar1" class="fbBar">
 		            			facebook
 			            	</div>
 							<br>
 							Cor: <input class="color" id="cor-barra-input">
-							<button id='rm-cor-barra' type="button" class="btn btn-danger">
+							<button id='rm-cor-barra' type="button" data-toggle="tooltip" data-original-title="Remover cor atual" class="btn  rm">
 							  <span class="glyphicon glyphicon-remove"></span>
 							</button> 
 						</div>
@@ -102,17 +102,27 @@
 							<br>
 							Pré-visualização
 							<br>
-							<div id="fbBar2" style="font-size: 16px; font-weight: bold; color: white; font-family: tahoma" class="fbBar">
+							<div id="fbBar2" class="fbBar">
 		            			facebook
 			            	</div>
 							<br>
-							<input type='text' style='width:450px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
-							<button id='add-pattern-barra' type="button" class="btn btn-success">
-							  <span class="glyphicon glyphicon-ok"></span>
-							</button>
-							<button id='rm-pattern-barra' type="button" class="btn btn-danger">
-							  <span class="glyphicon glyphicon-remove"></span>
-							</button>
+							<table>
+								<tr>
+									<td>
+										<input type='text' style='width:400px; margin-right:10px' id='pattern-barra-input' placeholder="Insira um link de uma imagem">
+									</td>
+									<td>
+										<button id='add-pattern-barra' type="button" style="margin-right:5px" data-toggle="tooltip" data-original-title="Guardar imagem atual" class="btn add">
+										  <span class="glyphicon glyphicon-ok"></span>
+										</button>
+									</td>
+									<td>
+										<button id='rm-pattern-barra' type="button" data-toggle="tooltip" data-original-title="Remover imagem atual" class="btn rm">
+										  <span class="glyphicon glyphicon-remove"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<br>
 						<b>Fundo:</b>
@@ -121,20 +131,30 @@
 						<div id='cor_fundo'>
 							<br>
 							Cor: <input class="color" id="cor-fundo-input">
-							<button id='rm-cor-fundo' type="button" class="btn btn-danger">
+							<button id='rm-cor-fundo' type="button" data-toggle="tooltip" data-original-title="Remover cor atual" class="btn  rm">
 							  <span class="glyphicon glyphicon-remove"></span>
 							</button>
 							<br>
 						</div>
 						<div id='pat_fundo'>
 							<br>
-							<input type="text" style="width:450px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
-							<button id="add-pattern-fundo" type="button" class="btn btn-success">
-							  <span class="glyphicon glyphicon-ok"></span>
-							</button>
-							<button id="rm-pattern-fundo" type="button" class="btn btn-danger">
-							  <span class="glyphicon glyphicon-remove"></span>
-							</button>
+							<table>
+								<tr>
+									<td>
+										<input type="text" style="width:400px; margin-right: 10px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
+									</td>
+									<td>
+										<button id="add-pattern-fundo" type="button" style="margin-right: 5px" data-toggle="tooltip" data-original-title="Guardar imagem atual" class="btn add">
+										  <span class="glyphicon glyphicon-ok"></span>
+										</button>
+									</td>
+									<td>
+										<button id="rm-pattern-fundo" type="button" data-toggle="tooltip" data-original-title="Remover imagem atual" class="btn rm">
+										  <span class="glyphicon glyphicon-remove"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
 							<br>
 						</div>
 						<br>
@@ -169,16 +189,128 @@
 				              <option value="9">32px</option>
 				            </select>
 				            <br>
-				            <button id='add-letra' style="margin-left: 110px; margin-right: 5px" type="button" class="btn btn-success">
-							  <span class="glyphicon glyphicon-ok"></span>
-							</button>
-				            <button id='rm-letra' type="button" class="btn btn-danger">
-							  <span class="glyphicon glyphicon-remove"></span>
-							</button>
+				            <table>
+				            	<tr>
+				            		<td>
+				            			<button id='add-letra' type="button" data-toggle="tooltip" data-original-title="Guardar novo tipo de letra" class="btn add" style="margin-left: 115px; margin-right: 5px">
+										  <span class="glyphicon glyphicon-ok"></span>
+										</button>
+				            		</td>
+				            		<td>
+				            			<button id='rm-letra' type="button" data-toggle="tooltip" data-original-title="Remover tipo de letra atual" class="btn rm">
+										  <span class="glyphicon glyphicon-remove"></span>
+										</button>
+				            		</td>
+				            	</tr>
+				            </table>
 			        	</div>
 					</div>
 				</div>
             </div>
+            <div id="help" class="tab-pane fade">
+            	<div class="row">
+	            	<br><br>
+	            	<div class="center-div">
+	            		<div class="panel-group" id="accordion">
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+						          <i class="indicator glyphicon glyphicon-chevron-up btn-xs"> </i> Criar Utilizadores
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse1" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        <p class="text" style="text-align: justify">
+			            			Após instalar a extensão deve abrir a página do <i>Facebook</i> e iniciar a sua sessão. <br>
+			            			Caso já tenha a página do <i>Facebook</i> aberta antes de instalar a extensão deve obrigatoriamente recarregar a página referida. <br>
+			            			Posto isto, pode carregar no botão <i>Novo Utilizador</i> e seguir as instruções. <br>
+			            			É importante recordar que na eventualidade de não se recordar do código que definiu para a sua conta, não há maneira de o recuperar. Caso isto aconteça, terá de desisntalar e voltar a instalar esta extensão para poder criar uma nova conta de utilizador. <br><br>
+			            			<b>Atenção:</b> Após criar a conta deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
+			            		</p>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+						          <i class="indicator glyphicon glyphicon-chevron-up btn-xs"> </i> Desativar Utilizadores
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse2" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        <p class="text" style="text-align: justify">
+			            			Existe a opção de desativar uma conta sem ter de a remover. <br>
+			            			Desta forma todas as mudanças na sua página do <i>Facebook</i> serão desativadas e o estilo oficial irá aparecer de novo. Para efetuar esta operação, só tem de carregar no botão <i>Desativar Conta</i> referente ao seu utilizador e introduzir o seu código. <br>
+			            			Para voltar a ativar a conta só tem de efetuar o processo inverso e todas as suas definições voltam a aparecer na página do <i>Facebook</i>. <br><br>
+			            			<b>Atenção:</b> Após qualquer operação deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
+			            		</p>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+						          <i class="indicator glyphicon glyphicon-chevron-up btn-xs"> </i> Editar e Remover
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse3" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        <p class="text" style="text-align: justify">
+			            			O utilizador tem a opção de editar o seu código. Para tal basta pressionar o botão <i>Editar Código</i> e irá aparecer uma janela em que o utilizador terá de introduzir o código atual e o novo código pretendido. <br>
+			            			Se assim o desejar também pode remover a sua conta. Pressione o botão <i>Remover Utilizador</i>, introduza o seu código e confirme se deseja eliminar a conta.<br><br>
+			            			<b>Atenção:</b> Após qualquer operação deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
+			            		</p>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+						          <i class="indicator glyphicon glyphicon-chevron-up btn-xs"> </i> Segurança
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse4" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        <p class="text" style="text-align: justify">
+			            			<b>Atenção:</b> Após qualquer operação deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
+			            		</p>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+						          <i class="indicator glyphicon glyphicon-chevron-up btn-xs"> </i> Personalizar
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse5" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        <p class="text" style="text-align: justify">
+						        	Para personalizar a página do <i>Facebook</i> a seu gosto, é permitido efetuar algumas mudanças. <br>
+						        	Antes de começar certifique-se que tem a sua sessão iniciada na página do <i>Facebook</i> e que tem uma conta criada nesta aplicação. <br><br>
+						        	Para personalizar a barra de topo do <i>Facebook</i> o utilizador pode escolher uma cor a seu gosto ou introduzir um link para uma imagem. Se escolher por inserir uma imagem deve carregar no botão <i>Guardar imagem atual</i> após introduzir um link. <br><br>
+						        	Pode também escolher uma cor ou uma imagem para o fundo do <i>Facebook</i> da mesma maneira na secção <i>Fundo</i>. <br><br>
+						        	Também pode escolher um novo tipo de letra e tamanho para a sua página na secção <i>Letra</i>. Para tal deve escolher uma das opções fornecidas no tipo de letra e um tamanho. Após isto pressione o botão <i>Guardar tipo de letra</i>. <br><br>
+						        	Para cada uma destas mudanças tem o respectivo botão para as remover, devolvendo o aspeto original à sua página do <i>Facebook</i>. <br><br>
+			            			<b>Atenção:</b> Após qualquer operação deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
+			            		</p>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+	            	</div>
+	            </div>
+	        </div>
         </div>
     </div>
 

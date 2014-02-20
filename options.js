@@ -31,18 +31,18 @@ function getData()
 
 			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1 && q == -1)
 			{
-				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
+				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn info'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn off'><span class='glyphicon glyphicon-remove'></span></button>";
 
 				
 				//Se a conta estiver ativada, mostra-se o botão verde "ON" e ao carregar nele a conta fica desativada.
 
 				if(items['atv-'+allKeys[i]] == '0')
 				{
-					table += "<button style='font-size:11px' id='on' type='button' data-toggle='tooltip' data-original-title='Desativar Conta' class='text btn btn-success'>ON</button></td></tr>";
+					table += "<button style='font-size: 11px' id='on' type='button' data-toggle='tooltip' data-original-title='Desativar Conta' class='text btn on'>ON</button></td></tr>";
 				}
 				else
 				{
-					table += "<button style='font-size:11px' id='off' type='button' data-toggle='tooltip' data-original-title='Ativar Conta' class='text btn btn-danger'>OFF</button></td></tr>";
+					table += "<button style='font-size: 11px' id='off' type='button' data-toggle='tooltip' data-original-title='Ativar Conta' class='text btn off'>OFF</button></td></tr>";
 				}
 
 				index++;
@@ -319,12 +319,34 @@ function User_OFF(Email)
 	});
 }
 
+function toggleChevron(e) {
+
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+
 $(document).ready(function() {
 
 	$('#cor_barra').hide();
 	$('#pat_barra').hide();
 	$('#cor_fundo').hide();
 	$('#pat_fundo').hide();
+
+	$('#rm-cor-barra').tooltip('hide');
+	$('#add-pattern-barra').tooltip('hide');
+	$('#rm-pattern-barra').tooltip('hide');
+	$('#rm-cor-fundo').tooltip('hide');
+	$('#add-pattern-fundo').tooltip('hide');
+	$('#rm-pattern-fundo').tooltip('hide');
+	$('#add-letra').tooltip('hide');
+	$('#rm-letra').tooltip('hide');
+
+	$('.collapse').collapse();
+
+	$('#accordion').on('hidden.bs.collapse', toggleChevron);
+	$('#accordion').on('shown.bs.collapse', toggleChevron);
 
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();

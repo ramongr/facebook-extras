@@ -210,7 +210,7 @@ $(document).ready(function()
 
 							//Verificar se o utilizador escolheu a opção para proibir certas palavras na publicação de textos
 
-							if(words == 0)
+							if(words == 1)
 							{	
 								var text = $('#u_0_1i').val();
 
