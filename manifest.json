@@ -16,7 +16,7 @@
   "options_page": "options.html",
   "content_scripts" : [{
     "matches": ["https://www.facebook.com/*"],
-    "css": ["bootstrap.min.css", "buttons.css", "bootstrap-switch.css"],
+    "css": ["bootstrap.min.css", "options.css", "bootstrap-switch.css", "simple-sidebar.css"],
     "js" : ["jquery-2.0.3.min.js","bootstrap.min.js","bootbox.min.js","main.js","options.js","sha3.js","lodash.min.js","bootstrap-switch.js"]
   }],
   "web_accessible_resources": ["jquery-2.0.3.js","jquery-2.0.3.min.map"]
