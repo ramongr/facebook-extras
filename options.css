@@ -61,11 +61,31 @@
 .fbBar{
 	height: 32px;
 	background-color: #3b5998;
-	width: 300px;
+	width: 495px;
 	font-size: 16px; 
 	font-weight: bold; 
 	color: white; 
 	font-family: tahoma;
+}
+
+.fbText{
+	margin-left: 40%;
+}
+
+.well{
+	margin-top: 25px;
+	margin-left: 20px;
+	height: 120px;
+	width: 275px;
+}
+
+.letra{
+	margin-top: 25px;
+	text-align: center;
+}
+
+.bootstrap-switch-id-barra-switch{
+	margin-left: 6px;
 }
 
 .add:hover,

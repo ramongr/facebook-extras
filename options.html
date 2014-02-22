@@ -90,7 +90,7 @@
 							Pré-visualização
 							<br>
 							<div id="fbBar1" class="fbBar">
-		            			facebook
+		            			<span class="fbText">facebook</span>
 			            	</div>
 							<br>
 							Cor: <input class="color" id="cor-barra-input">
@@ -103,7 +103,7 @@
 							Pré-visualização
 							<br>
 							<div id="fbBar2" class="fbBar">
-		            			facebook
+		            			<span class="fbText">facebook</span>
 			            	</div>
 							<br>
 							<table>
@@ -125,7 +125,7 @@
 							</table>
 						</div>
 						<br>
-						<b>Fundo:</b>
+						<b>Fundo do ecrã:</b>
 						<input data-size="small" id="fundo-switch" type="checkbox" checked data-on-text="Cor" data-off-text="Padrão"> 
 						<br>
 						<div id='cor_fundo'>
@@ -138,7 +138,7 @@
 						</div>
 						<div id='pat_fundo'>
 							<br>
-							<table>
+							<table id="teste">
 								<tr>
 									<td>
 										<input type="text" style="width:400px; margin-right: 10px" id="pattern-fundo-input" placeholder="Insira um link de uma imagem">
@@ -160,47 +160,51 @@
 						<br>
 						<div id='letra'>
 							<b>Letra</b>
-							<br><br>
-							Selecione um tipo
-							<select style="width: 200px" id="letras-list" class="form-control">
-				              <option value="-1"></option>
-				              <option value="0">Armata</option>
-				              <option value="1">Roboto</option>
-				              <option value="2">Happy Monkey</option>
-				              <option value="3">Ledger</option>
-				              <option value="4">Capriola</option>
-				              <option value="5">Ruda</option>
-				              <option value="6">Shadows Into Light Two</option>
-				              <option value="7">Courgette</option>
-				            </select>
-				            <br>
-				            Selecione um tamanho
-							<select style="width: 200px" id="tam-list" class="form-control">
-				              <option value="-1"></option>
-				              <option value="0">10px</option>
-				              <option value="1">12px</option>
-				              <option value="2">14px</option>
-				              <option value="3">16px</option>
-				              <option value="4">18px</option>
-				              <option value="5">20px</option>
-				              <option value="6">22px</option>
-				              <option value="7">24px</option>
-				              <option value="8">28px</option>
-				              <option value="9">32px</option>
-				            </select>
-				            <br>
-				            <div class="well well-lg">
-				            	<span id="letra-exemplo"></span>
-				            </div>
-				            <br>
-				            <table>
+							<br>
+							<table>
+								<tr>
+									<td>
+										Selecione um tipo
+										<select style="width: 200px" id="letras-list" class="form-control">
+							              <option value="-1"></option>
+							              <option value="0">Armata</option>
+							              <option value="1">Roboto</option>
+							              <option value="2">Happy Monkey</option>
+							              <option value="3">Ledger</option>
+							              <option value="4">Capriola</option>
+							              <option value="5">Ruda</option>
+							              <option value="6">Shadows Into Light Two</option>
+							              <option value="7">Courgette</option>
+							            </select>
+							            <br>
+							            Selecione um tamanho
+										<select style="width: 200px" id="tam-list" class="form-control">
+							              <option value="-1"></option>
+							              <option value="0">10px</option>
+							              <option value="1">12px</option>
+							              <option value="2">14px</option>
+							              <option value="3">16px</option>
+							              <option value="4">18px</option>
+							              <option value="5">20px</option>
+							              <option value="6">22px</option>
+							              <option value="7">24px</option>
+							              <option value="8">28px</option>
+							              <option value="9">30px</option>
+							            </select>
+									</td>
+									<td>
+										<div class="well">
+							            	<div class="letra" id="letra-exemplo"></div>
+							            </div>
+									</td>
+								</tr>
 				            	<tr>
 				            		<td>
-				            			<button id='add-letra' type="button" data-toggle="tooltip" data-original-title="Guardar novo tipo de letra" class="btn add" style="margin-left: 115px; margin-right: 5px">
-										  <span class="glyphicon glyphicon-ok"></span>
-										</button>
 				            		</td>
 				            		<td>
+				            			<button id='add-letra' type="button" data-toggle="tooltip" data-original-title="Guardar novo tipo de letra" class="btn add" style="margin-left: 208px; margin-right: 5px">
+										  <span class="glyphicon glyphicon-ok"></span>
+										</button>
 				            			<button id='rm-letra' type="button" data-toggle="tooltip" data-original-title="Remover tipo de letra atual" class="btn rm">
 										  <span class="glyphicon glyphicon-remove"></span>
 										</button>

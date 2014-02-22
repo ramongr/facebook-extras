@@ -580,14 +580,14 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Armata', sans-serif";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Armata, sans-serif"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Armata', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break; 
 
 			case '1': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Roboto', sans-serif";
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Roboto, sans-serif"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Roboto', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break; 
 
@@ -595,7 +595,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Happy Monkey', cursive";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Happy Monkey, cursive"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Happy Monkey', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
@@ -603,7 +603,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Ledger', serif";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Ledger, serif"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ledger', serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
@@ -611,7 +611,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Capriola', sans-serif";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Capriola, sans-serif"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Capriola', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
@@ -619,7 +619,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Ruda', sans-serif";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Ruda, sans-serif"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ruda', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
@@ -627,7 +627,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Shadows Into Light Two', cursive";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Shadows Into Light Two', cursive";
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Shadows Into Light Two', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
@@ -635,7 +635,7 @@ $(document).ready(function() {
 					  obj['letra-'+$('#email-actual').text()] = "'Courgette', cursive";
 
 					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = 'font-family: "Courgette, cursive"';
+					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Courgette', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
 					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 		}
@@ -643,43 +643,33 @@ $(document).ready(function() {
 		switch($('#tam-list').val())
 		{
 			case '0': obj['tam-lt-'+$('#email-actual').text()] = "10px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 10px'; 
 					  break;
 
 			case '1': obj['tam-lt-'+$('#email-actual').text()] = "12px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 12px'; 
 					  break;
 
 			case '2': obj['tam-lt-'+$('#email-actual').text()] = "14px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 14px'; 
 					  break;
 
 			case '3': obj['tam-lt-'+$('#email-actual').text()] = "16px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 16px'; 
 					  break;
 
 			case '4': obj['tam-lt-'+$('#email-actual').text()] = "18px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 18px';
 					  break;
 
 			case '5': obj['tam-lt-'+$('#email-actual').text()] = "20px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 20px';
 					  break;
 
 			case '6': obj['tam-lt-'+$('#email-actual').text()] = "22px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 22px'; 
 					  break;
 
 			case '7': obj['tam-lt-'+$('#email-actual').text()] = "24px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 24px';
 					  break;
 
 			case '8': obj['tam-lt-'+$('#email-actual').text()] = "28px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 28px';
 					  break;
 
-			case '9': obj['tam-lt-'+$('#email-actual').text()] = "32px"; 
-					  document.getElementById('letra-exemplo').style.cssText = 'font-size: 32px'; 
+			case '9': obj['tam-lt-'+$('#email-actual').text()] = "30px"; 
 					  break;
 		}  
 
@@ -691,6 +681,8 @@ $(document).ready(function() {
 		$('#letras-list').val('-1');
 
 		$('#tam-list').val('-1');
+
+		$('#letra-exemplo').text('');
 
 		var obj = {};
 
