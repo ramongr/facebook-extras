@@ -45,6 +45,12 @@
   text-decoration: none;
 }
 
+.sidebar-nav .active{
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  text-decoration: none;
+}
+
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;

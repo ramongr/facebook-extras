@@ -327,6 +327,52 @@ function toggleChevron(e) {
         .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
 }
 
+function preview_letra(val_letra, tam_letra)
+{
+	switch(val_letra)
+	{
+		case '0': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Armata', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '1': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Roboto', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '2': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Happy Monkey', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '3': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ledger', serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '4': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Capriola', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '5': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ruda', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '6': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Shadows Into Light Two', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '7': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Courgette', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+	}
+}
+
 $(document).ready(function() {
 
 	$('#cor_barra').hide();
@@ -578,65 +624,34 @@ $(document).ready(function() {
 		{
 			case '0': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Armata&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Armata', sans-serif";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Armata', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break; 
 
 			case '1': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Roboto', sans-serif";
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Roboto', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break; 
 
 			case '2': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Happy+Monkey&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Happy Monkey', cursive";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Happy Monkey', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
 			case '3': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Ledger&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Ledger', serif";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ledger', serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
 			case '4': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Capriola&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Capriola', sans-serif";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Capriola', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
 			case '5': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Ruda&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Ruda', sans-serif";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ruda', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
 			case '6': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Shadows Into Light Two', cursive";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Shadows Into Light Two', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 
 			case '7': obj['link-lt-'+$('#email-actual').text()] = "<link href='https://fonts.googleapis.com/css?family=Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>";
 					  obj['letra-'+$('#email-actual').text()] = "'Courgette', cursive";
-
-					  $('#letra-exemplo').show();
-					  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Courgette', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
-					  $('#letra-exemplo').text("Isto é um teste");
 					  break;
 		}
 
@@ -682,8 +697,6 @@ $(document).ready(function() {
 
 		$('#tam-list').val('-1');
 
-		$('#letra-exemplo').text('');
-
 		var obj = {};
 
 		obj['letra-'+$('#email-actual').text()] = "'lucida grande',tahoma,verdana,arial,sans-serif";
@@ -691,6 +704,26 @@ $(document).ready(function() {
 
 		chrome.storage.local.set(obj);
 	});
+
+	$("#letras-list").change(function() {
+        
+        if($('#letras-list').find('option:selected').val() != -1)
+        {
+        	preview_letra($('#letras-list').find('option:selected').val(), $('#tam-list').find('option:selected').text());
+        }
+        else
+        {
+        	$('#letra-exemplo').hide();
+        }
+    });
+
+    $('#tam-list').change(function() {
+
+    	if($('#letras-list').find('option:selected').val() != -1)
+    	{
+			preview_letra($('#letras-list').find('option:selected').val(), $('#tam-list').find('option:selected').text());
+    	}
+    });
 });
 
 
