@@ -1,3 +1,6 @@
+
+//Constrói a tabela de utilizadores guardados
+
 function getData()
 {
 	chrome.storage.local.get(null, function(items) {
@@ -6,7 +9,8 @@ function getData()
 
 	    var table = "<table id='tb' class='text table table-striped'>";
 
-		table += "<tr>																																																		  <td style='text-align: center;'><b> # </b></td>																																					              <td style='text-align: center;'><b> E-Mail </b></td>																													              <td style='text-align: center;'><b> Edição </b></td>																																				  </tr>"
+		table += "<tr>																																																		  <td style='width: 50; text-align: center;'><b> # </b></td>																																					              <td style='width: 350px; text-align: center;'><b> E-Mail </b></td>																													              <td style='width: 200px; text-align: center;'><b> Edição </b></td>																																				  </tr>"
+
 		var index = 1;
 
 		for (var i = 1; i < allKeys.length; i++) 
@@ -25,21 +29,24 @@ function getData()
 			var m = allKeys[i].search('link-lt-');
 			var n = allKeys[i].search('letra-');
 			var o = allKeys[i].search('tam-lt-');
+			var p = allKeys[i].search('pin-switch-');
+			var q = allKeys[i].search('words-switch-');
+			var r = allKeys[i].search('c_user');
 
-			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1)
+			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1 && q == -1 && r == -1)
 			{
-				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px;' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn btn-warning'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px;' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn btn-danger'><span class='glyphicon glyphicon-remove'></span></button>";
+				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn info'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn off'><span class='glyphicon glyphicon-remove'></span></button>";
 
 				
 				//Se a conta estiver ativada, mostra-se o botão verde "ON" e ao carregar nele a conta fica desativada.
 
 				if(items['atv-'+allKeys[i]] == '0')
 				{
-					table += "<button style='font-size:11px' id='on' type='button' data-toggle='tooltip' data-original-title='Desativar Conta' class='text btn btn-success'>ON</button></td></tr>";
+					table += "<button style='font-size: 11px' id='on' type='button' data-toggle='tooltip' data-original-title='Desativar Conta' class='text btn on'>ON</button></td></tr>";
 				}
 				else
 				{
-					table += "<button style='font-size:11px' id='off' type='button' data-toggle='tooltip' data-original-title='Ativar Conta' class='text btn btn-danger'>OFF</button></td></tr>";
+					table += "<button style='font-size: 11px' id='off' type='button' data-toggle='tooltip' data-original-title='Ativar Conta' class='text btn off'>OFF</button></td></tr>";
 				}
 
 				index++;
@@ -50,7 +57,6 @@ function getData()
 
 		document.getElementById('table-print').innerHTML = table;
 
-		//$('button#new-code').tooltip('hide');
 		$('button#edit').tooltip('hide');
 		$('button#remove').tooltip('hide');
 		$('button#on').tooltip('hide');
@@ -92,20 +98,13 @@ function getData()
 
 			editUser(mail);
 		});
-
-		/*$('button#new-code').on('click',function(){
-			
-			var td = $(this).closest('td').parent()[0];
-
-			var mail = td.getElementsByTagName('td')[1].innerHTML;
-
-			recoverCode(mail);
-		});*/
 	});
 	
 }
 
-function clickHandler(e) 
+//Permite criar um novo utilizador quando o botão é pressionado
+
+function createUser(e) 
 {
 	var flag = 0;
 	
@@ -156,6 +155,8 @@ function clickHandler(e)
 										obj['atv-'+email] = '0';
 										obj['cor-br-'+email] = result['cor_br_user'];
 										obj['cor-fd-'+email] = result['cor_fd_user'];
+										obj['pin-switch-'+email] = 1;
+										obj['words-switch-'+email] = 1;
 
 										chrome.storage.local.set(obj);
 
@@ -189,6 +190,8 @@ function clickHandler(e)
 		}
 	});
 }
+
+//Dado um Email de um utilizador, remove o mesmo do sistema
 
 function removeUser(Email)
 {
@@ -225,6 +228,9 @@ function removeUser(Email)
 		}
 	});
 }
+
+
+//Permite editar o código de um dado uilizador
 
 function editUser(Email)
 {
@@ -266,38 +272,7 @@ function editUser(Email)
 	});	
 }
 
-/*function sendMail(Email, Code) 
-{
-	var param = {
-            "email": Email,
-            "code": Code
-    };
-
-    $.ajax({
-        url: 'http://megajpc.net23.net/Email.php',
-        data: param,
-        type: 'POST',
-        success: function (data) {}
-    });
-}
-
-function recoverCode(Email)
-{
-	//bootbox.confirm("<div class='text'><b>Caso não se recorde do seu código, é possível receber um novo através do E-mail registado.<br><br>Deseja continuar?</b></div>", function(result) {
-
-		var code = Math.floor((Math.random()*1000000)+1);
-
-		var obj = {};
-
-        obj[Email] = CryptoJS.SHA3(code.toString());
-
-		//chrome.storage.local.set(obj);
-
-		//sendMail(Email, code);
-
-		//bootbox.alert("<br><div class='text'><b></b></div>");
-	//});
-}*/
+//Permite ativar a conta de um dado utilizador
 
 function User_ON(Email)
 {
@@ -328,6 +303,8 @@ function User_ON(Email)
 	});
 }
 
+//Permite desativar a conta de um dado utilizador
+
 function User_OFF(Email)
 {
 	bootbox.confirm("<form role='form'>																																																  <div class='text'><b>Introduza o seu código.</b></div><br>																																					      <div class='form-group'>																																													          <input style='width: 300px;' type='password' class='form-control' id='Password'>																																	  </div></form>", function (result) {
@@ -357,93 +334,222 @@ function User_OFF(Email)
 	});
 }
 
+//Controla o ícone 'chevron' na seção de ajuda
 
-//Funções para testes
+function toggleChevron(e) {
 
-/*function setData()
-{
-	chrome.storage.local.set({'megajpc': '123'});
-	chrome.storage.local.set({'ramon': '456'});
-	chrome.storage.local.set({'sandra': '789'});
-	chrome.storage.local.set({'sofia': '0'});
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
 }
 
-function returnData(Email)
-{
-	chrome.storage.local.get(Email, function (result) {
+//Ao escolher um tipo de letra para o Facebook, é construída uma pré-visualização
 
-		console.log(Email, result[Email]);
-	});
+function preview_letra(val_letra, tam_letra)
+{
+	switch(val_letra)
+	{
+		case '0': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Armata', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '1': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Roboto', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '2': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Happy Monkey', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '3': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ledger', serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '4': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Capriola', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '5': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Ruda', sans-serif; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '6': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Shadows Into Light Two', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+
+		case '7': $('#letra-exemplo').show();
+				  document.getElementById('letra-exemplo').style.cssText = "font-family: 'Courgette', cursive; font-size: " + $('#tam-list').find('option:selected').text() + "";
+				  $('#letra-exemplo').text("Isto é um teste");
+				  break;
+	}
 }
 
-function getAll()
-{
-	chrome.storage.local.get(null, function(items) {
-
-	    var allKeys = Object.keys(items);
-
-	    for (var i = 0; i < allKeys.length; i++) 
-		{
-			console.log(i + ", " + allKeys[i] + ", " + items[allKeys[i]] + ", " + items['id-'+allKeys[i]] + ", " + items['atv-'+allKeys[i]]);
-		}
-
-	});
-}
-
-function teste()
-{
-	var a = CryptoJS.SHA3('123');
-	var b = CryptoJS.SHA3('456');
-	var c = CryptoJS.SHA3('123');
-
-	console.log(_.isEqual(a, b));
-	console.log(_.isEqual(a, c));
-}*/
-
-
-$(document).ready(function(){
+$(document).ready(function() {
 
 	$('#cor_barra').hide();
 	$('#pat_barra').hide();
 	$('#cor_fundo').hide();
 	$('#pat_fundo').hide();
 
+	$('#aviso-ok').hide();
+	$('#aviso-rm').hide();
+
+	$('#rm-cor-barra').tooltip('hide');
+	$('#add-pattern-barra').tooltip('hide');
+	$('#rm-pattern-barra').tooltip('hide');
+	$('#rm-cor-fundo').tooltip('hide');
+	$('#add-pattern-fundo').tooltip('hide');
+	$('#rm-pattern-fundo').tooltip('hide');
+	$('#add-letra').tooltip('hide');
+	$('#rm-letra').tooltip('hide');
+
+	$('#letra-exemplo').hide();
+
+	$('.collapse').collapse();
+
+	$('#accordion').on('hidden.bs.collapse', toggleChevron);
+	$('#accordion').on('shown.bs.collapse', toggleChevron);
+
+	//Controla a navegação entra as tabs da barra lateral
+
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
 	});
 
+	//Controla o botão switch 'Pedir sempre código'
+
+	$('#pin-switch').bootstrapSwitch();
+	
+	$('#pin-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			var obj = {};
+
+            obj['pin-switch-'+$('#email-actual').text()] = 1;
+
+			chrome.storage.local.set(obj);
+		}
+		else
+		{
+			var obj = {};
+
+            obj['pin-switch-'+$('#email-actual').text()] = 0;
+
+			chrome.storage.local.set(obj);
+		}
+	});
+
+	//Controla o botão switch 'Permitir palavras obscenas'
+
+	$('#words-switch').bootstrapSwitch();
+	
+	$('#words-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			var obj = {};
+
+            obj['words-switch-'+$('#email-actual').text()] = 1;
+
+			chrome.storage.local.set(obj);
+		}
+		else
+		{
+			var obj = {};
+
+            obj['words-switch-'+$('#email-actual').text()] = 0;
+
+			chrome.storage.local.set(obj);
+		}
+	});
+
+	//Controla o botão switch para definir uma cor ou uma imagem para a barra de topo
+
+	$('#barra-switch').bootstrapSwitch();
+	
+	$('#barra-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			$('#cor_barra').show();
+			$('#pat_barra').hide();
+		}
+		else
+		{
+			$('#cor_barra').hide();
+			$('#pat_barra').show();
+		}
+	});
+
+	//Controla o botão switch para definir uma cor ou uma imagem para o fundo de ecrã
+
+	$('#fundo-switch').bootstrapSwitch();
+	
+	$('#fundo-switch').on('switchChange', function (e, data) {
+
+		if(data.value == true)
+		{
+			$('#cor_fundo').show();
+			$('#pat_fundo').hide();
+		}
+		else
+		{
+			$('#cor_fundo').hide();
+			$('#pat_fundo').show();
+		}
+	});
+
+	//Event listener para alterar a cor da barra de topo dinamicamente
+
 	var c = document.getElementById("cor-barra-input");
 
-	c.addEventListener("input", function() {
+	c.addEventListener("change", function() {
 
-		if(c.value)
-		{
-			chrome.storage.local.get(null, function(items) {
+        chrome.storage.local.get(null, function(items) {
 
-			    var allKeys = Object.keys(items);
+		    var allKeys = Object.keys(items);
 
-			    for (var i = 1; i < allKeys.length; i++) 
+		    for (var i = 1; i < allKeys.length; i++) 
+			{
+				if(items['id-'+allKeys[i]] == items['user-actual'])
 				{
-					if(items['id-'+allKeys[i]] == items['user-actual'])
-					{
-						var obj = {};
+					var obj = {};
 
-		                obj['cor-br-'+allKeys[i]] = $('#cor-barra-input').val();
+	                obj['cor-br-'+allKeys[i]] = '#'+$('#cor-barra-input').val();
 
-		                obj['pat-br-'+allKeys[i]] = null;
+	                obj['pat-br-'+allKeys[i]] = null;
 
-		                $('#fbBar1').css('background-color', $('#cor-barra-input').val());
+	                $('#fbBar1').css('background-color', '#'+$('#cor-barra-input').val());
 
-		                $('#pattern-barra-input').val('');
+	                $('#pattern-barra-input').val('');
 
-						chrome.storage.local.set(obj);
-					}
+					chrome.storage.local.set(obj, function() {
+
+						$('#aviso-ok').show();
+
+						window.setTimeout(function() {
+
+						    $('#aviso-ok').hide();
+
+						}, 3000);
+					});
 				}
-			});
-		}
+			}
+		});
 
-	}, false); 
+	}, false);
+
+	//Guarda os detalhes sobre a imagem para a barra de topo
 
 	$('#add-pattern-barra').on('click', function() {
 
@@ -455,9 +561,20 @@ $(document).ready(function(){
 
         $('#fbBar2').css('background-image', 'url(' + $('#pattern-barra-input').val() + ')');
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a imagem guardada para a barra de topo
 
 	$('#rm-pattern-barra').on('click', function() {
 
@@ -469,28 +586,50 @@ $(document).ready(function(){
 
         $('#fbBar2').css({'background-image': 'none', 'background-color': '#3b5998' });
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
 
-	$("input[name='barra']").on('click', function() {
+	//Remove a cor atual da barra de topo
 
-		if($("input[name='barra']:checked").val() == 0)
-		{
-			$('#cor_barra').show();
-			$('#pat_barra').hide();
-		}
+	$('#rm-cor-barra').on('click', function() {
 
-		if($("input[name='barra']:checked").val() == 1)
-		{
-			$('#pat_barra').show();
-			$('#cor_barra').hide();
-		}
+		var obj = {};
+
+        obj['cor-br-'+$('#email-actual').text()] = "#3b5998";
+
+        $('#fbBar1').css({'background-image': 'none', 'background-color': '#3b5998'});
+
+        $('#cor-barra-input').val("#3b5998");
+        $('#cor-barra-input').css("background-color", "#3b5998");
+
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
+
 	});
+
+	//Event listener para alterar a cor do fundo do ecrã dinamicamente
 
 	var d = document.getElementById("cor-fundo-input");
 
-	d.addEventListener("input", function() {
+	d.addEventListener("change", function() {
 
 		if(d.value)
 		{
@@ -504,19 +643,30 @@ $(document).ready(function(){
 					{
 						var obj = {};
 
-		                obj['cor-fd-'+allKeys[i]] = $('#cor-fundo-input').val();
+		                obj['cor-fd-'+allKeys[i]] = '#'+$('#cor-fundo-input').val();
 
 		                obj['pat-fd-'+allKeys[i]] = null;
 
 		                $('#pattern-fundo-input').val('');
 
-						chrome.storage.local.set(obj);
+						chrome.storage.local.set(obj, function() {
+
+							$('#aviso-ok').show();
+
+							window.setTimeout(function() {
+
+							    $('#aviso-ok').hide();
+
+							}, 3000);
+						});
 					}
 				}
 			});
 		}
 
 	}, false); 
+
+	//Guarda os detalhes sobre a imagem para o fundo do ecrã
 
 	$('#add-pattern-fundo').on('click', function() {
 
@@ -526,9 +676,20 @@ $(document).ready(function(){
 
         obj['pat-fd-'+$('#email-actual').text()] = $('#pattern-fundo-input').val();
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a imagem guardada para o fundo do ecrã
 
 	$('#rm-pattern-fundo').on('click', function() {
 
@@ -538,24 +699,44 @@ $(document).ready(function(){
 
         $('#pattern-fundo-input').val('');
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
 
-	$("input[name='fundo']").on('click', function() {
+	//Remove a cor atual do fundo do ecrã
 
-		if($("input[name='fundo']:checked").val() == 0)
-		{
-			$('#cor_fundo').show();
-			$('#pat_fundo').hide();
-		}
+	$('#rm-cor-fundo').on('click', function() {
 
-		if($("input[name='fundo']:checked").val() == 1)
-		{
-			$('#pat_fundo').show();
-			$('#cor_fundo').hide();
-		}
+		var obj = {};
+
+        obj['cor-fd-'+$('#email-actual').text()] = "#FFFFFF";
+
+        $('#cor-fundo-input').val("#FFFFFF");
+        $('#cor-fundo-input').css("background-color", "#FFFFFF");
+
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
+
 	});
+
+	//Adiciona um novo tipo de letra para o facebook
 
 	$('#add-letra').on('click', function() {
 
@@ -598,29 +779,50 @@ $(document).ready(function(){
 
 		switch($('#tam-list').val())
 		{
-			case '0': obj['tam-lt-'+$('#email-actual').text()] = "10px"; break;
+			case '0': obj['tam-lt-'+$('#email-actual').text()] = "10px"; 
+					  break;
 
-			case '1': obj['tam-lt-'+$('#email-actual').text()] = "12px"; break;
+			case '1': obj['tam-lt-'+$('#email-actual').text()] = "12px"; 
+					  break;
 
-			case '2': obj['tam-lt-'+$('#email-actual').text()] = "14px"; break;
+			case '2': obj['tam-lt-'+$('#email-actual').text()] = "14px"; 
+					  break;
 
-			case '3': obj['tam-lt-'+$('#email-actual').text()] = "16px"; break;
+			case '3': obj['tam-lt-'+$('#email-actual').text()] = "16px"; 
+					  break;
 
-			case '4': obj['tam-lt-'+$('#email-actual').text()] = "18px"; break;
+			case '4': obj['tam-lt-'+$('#email-actual').text()] = "18px"; 
+					  break;
 
-			case '5': obj['tam-lt-'+$('#email-actual').text()] = "20px"; break;
+			case '5': obj['tam-lt-'+$('#email-actual').text()] = "20px"; 
+					  break;
 
-			case '6': obj['tam-lt-'+$('#email-actual').text()] = "22px"; break;
+			case '6': obj['tam-lt-'+$('#email-actual').text()] = "22px"; 
+					  break;
 
-			case '7': obj['tam-lt-'+$('#email-actual').text()] = "24px"; break;
+			case '7': obj['tam-lt-'+$('#email-actual').text()] = "24px"; 
+					  break;
 
-			case '8': obj['tam-lt-'+$('#email-actual').text()] = "28px"; break;
+			case '8': obj['tam-lt-'+$('#email-actual').text()] = "28px"; 
+					  break;
 
-			case '9': obj['tam-lt-'+$('#email-actual').text()] = "32px"; break;
+			case '9': obj['tam-lt-'+$('#email-actual').text()] = "30px"; 
+					  break;
 		}  
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 	});
+
+	//Remove o tipo de letra atual do facebook
 
 	$('#rm-letra').on('click', function() {
 
@@ -628,15 +830,51 @@ $(document).ready(function(){
 
 		$('#tam-list').val('-1');
 
+		$('#letra-exemplo').hide();
+
 		var obj = {};
 
 		obj['letra-'+$('#email-actual').text()] = "'lucida grande',tahoma,verdana,arial,sans-serif";
 		obj['tam-lt-'+$('#email-actual').text()] = "11px";
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 	});
+
+	//Ao escolher um tipo de letra, é criada uma pré-visualização dinamicamente
+
+	$("#letras-list").change(function() {
+        
+        if($('#letras-list').find('option:selected').val() != -1)
+        {
+        	preview_letra($('#letras-list').find('option:selected').val(), $('#tam-list').find('option:selected').text());
+        }
+        else
+        {
+        	$('#letra-exemplo').hide();
+        }
+    });
+
+	//Ao escolher um tamanho de letra, esta é aplicada imediatamente á pré-visualização
+
+    $('#tam-list').change(function() {
+
+    	if($('#letras-list').find('option:selected').val() != -1)
+    	{
+			preview_letra($('#letras-list').find('option:selected').val(), $('#tam-list').find('option:selected').text());
+    	}
+    });
 });
 
+//Devolve todos os detalhes guardados sobre o utilizador atual, tais como: cor de fundo, tipos de letra, etc.
 
 function getCustomData()
 {
@@ -648,12 +886,56 @@ function getCustomData()
 		{
 			if(items['id-'+allKeys[i]] == items['user-actual'])
 			{
-				$('#email-actual').text(allKeys[i]);
-				$('#cor-barra-input').val(items['cor-br-'+allKeys[i]]);
-				$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
-				$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
-				$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
+				$('span#email-actual').text(allKeys[i]);
 
+				if(items['cor-br-'+allKeys[i]])
+				{
+					$('#cor-barra-input').val(items['cor-br-'+allKeys[i]]);
+					$('#cor-barra-input').css("background-color", items['cor-br-'+allKeys[i]]);
+
+					$('#fbBar1').css({'background-image': 'none', 'background-color': items['cor-br-'+allKeys[i]]});
+				}
+				else
+				{
+					$('#cor-barra-input').val("#3b5998");
+					$('#cor-barra-input').css("background-color", "#3b5998");
+
+					$('#fbBar1').css({'background-image': 'none', 'background-color': "#3b5998"});
+				}
+				
+				if(items['pat-br-'+allKeys[i]])
+				{
+					$('#pattern-barra-input').val(items['pat-br-'+allKeys[i]]);
+
+					$('#fbBar2').css('background-image', 'url(' + items['pat-br-'+allKeys[i]] + ')');
+				}
+				else
+				{
+					$('#pattern-barra-input').val('');
+
+					$('#fbBar2').css({'background-image': 'none', 'background-color': "#3b5998"});
+				}
+				
+				if(items['cor-fd-'+allKeys[i]])
+				{
+					$('#cor-fundo-input').val(items['cor-fd-'+allKeys[i]]);
+					$('#cor-fundo-input').css('background-color', items['cor-fd-'+allKeys[i]]);
+				}
+				else
+				{
+					$('#cor-fundo-input').val("#FFFFFF");
+					$('#cor-fundo-input').css('background-color', "#FFFFFF");
+				}
+				
+				if(items['pat-fd-'+allKeys[i]])
+				{
+					$('#pattern-fundo-input').val(items['pat-fd-'+allKeys[i]]);
+				}
+				else
+				{
+					$('#pattern-fundo-input').val('');
+				}
+				
 				switch(items['letra-'+allKeys[i]])
 				{
 					case "'Armata', sans-serif": $('#letras-list').val('0'); break;
@@ -695,32 +977,28 @@ function getCustomData()
 
 					case '32px': $('#tam-list').val('9'); break;
 				}
+
+				switch(items['pin-switch-'+allKeys[i]])
+				{
+					case 0: $('#pin-switch').bootstrapSwitch('state', false); break;
+
+					case 1: $('#pin-switch').bootstrapSwitch('state', true); break;
+				}
+
+				switch(items['words-switch-'+allKeys[i]])
+				{
+					case 0: $('#words-switch').bootstrapSwitch('state', false); break;
+
+					case 1: $('#words-switch').bootstrapSwitch('state', true); break;
+				}
 			}
 		}
 	});
 }
 
-$('.nav-tabs a').click(function (e) {
-	e.preventDefault();
-	$(this).tab('show');
-});
-
-$('#Tabs a[href="#users"]').click(function() {
-
-});
-
-$('#Tabs a[href="#safety"]').click(function() {
-
-});
-
-$('#Tabs a[href="#custom"]').click(function() {
-
-});
-
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click', clickHandler);
+  document.querySelector('button').addEventListener('click', createUser);
   getData();
   getCustomData();
-  //getAll();
 });
 	
