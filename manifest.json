@@ -1,23 +1,23 @@
 {
   "manifest_version": 2,
 
-  "name": "Facebook Guardian",
-  "description": "This extension protect your facebook buttons from wrongly usage",
+  "name": "Facebook Extras",
+  "description": "This extension protect your facebook buttons from wrongly usage and provides customization for user account's",
   "version": "1.0",
   "icons": {
-    "48": "fg-icon-48x48.png"
+    "48": "./img/fe-icon-48x48.png"
   }, 
   "browser_action": {
-    "default_icon": "fg-icon.png"
+    "default_icon": "./img/fe-icon.png"
   },
   "permissions": [
     "storage"
   ],
-  "options_page": "options.html",
+  "options_page": "./html/options.html",
   "content_scripts" : [{
     "matches": ["https://www.facebook.com/*"],
-    "css": ["bootstrap.min.css", "options.css", "bootstrap-switch.css", "simple-sidebar.css"],
-    "js" : ["jquery-2.0.3.min.js","bootstrap.min.js","bootbox.min.js","main.js","options.js","sha3.js","lodash.min.js","bootstrap-switch.js"]
+    "css": ["./css/bootstrap.min.css", "./css/options.css", "./css/bootstrap-switch.css", "./css/simple-sidebar.css"],
+    "js" : ["./js/jquery-2.0.3.js", "./js/jquery-2.0.3.min.js","./js/bootstrap.min.js","./js/bootbox.min.js","./js/main.js","./js/options.js","./js/sha3.js","./js/lodash.min.js","./js/bootstrap-switch.js"]
   }],
-  "web_accessible_resources": ["jquery-2.0.3.js","jquery-2.0.3.min.map"]
+  "web_accessible_resources": ["./js/jquery-2.0.3.min.map"]
 }

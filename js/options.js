@@ -1,3 +1,6 @@
+
+//Constrói a tabela de utilizadores guardados
+
 function getData()
 {
 	chrome.storage.local.get(null, function(items) {
@@ -28,8 +31,9 @@ function getData()
 			var o = allKeys[i].search('tam-lt-');
 			var p = allKeys[i].search('pin-switch-');
 			var q = allKeys[i].search('words-switch-');
+			var r = allKeys[i].search('c_user');
 
-			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1 && q == -1)
+			if(a == -1 && b == -1 && c == -1 && d == -1 && e == -1 && f == -1 && g == -1 && h == -1 && j == -1 && k == -1 && l == -1 && m == -1 && n == -1 && o == -1 && p == -1 && q == -1 && r == -1)
 			{
 				table += "<tr><td style='text-align: center;'>" 																																					              + (index) + 																																														            "</td><td style='text-align: center;'>" 																																                          + allKeys[i] + 																																														        "</td><td style='text-align: center;'>																																                          <button style='margin-right: 10px' id='edit' type='button' data-toggle='tooltip' data-original-title='Editar Código' class='btn info'><span class='glyphicon glyphicon-pencil'></span></button>															<button style='margin-right: 10px' id='remove' type='button' data-toggle='tooltip' data-original-title='Remover Utilizador' class='btn off'><span class='glyphicon glyphicon-remove'></span></button>";
 
@@ -98,7 +102,9 @@ function getData()
 	
 }
 
-function clickHandler(e) 
+//Permite criar um novo utilizador quando o botão é pressionado
+
+function createUser(e) 
 {
 	var flag = 0;
 	
@@ -185,6 +191,8 @@ function clickHandler(e)
 	});
 }
 
+//Dado um Email de um utilizador, remove o mesmo do sistema
+
 function removeUser(Email)
 {
 	bootbox.confirm("<div class='text'><b>Por favor introduza o seu código.</b><br><br><br>																																				         <div class='form-group'>																																											             <input style='width: 300px;' type='password' class='form-control' id='Password'>																																	 </div>", function(result) {
@@ -220,6 +228,9 @@ function removeUser(Email)
 		}
 	});
 }
+
+
+//Permite editar o código de um dado uilizador
 
 function editUser(Email)
 {
@@ -261,6 +272,8 @@ function editUser(Email)
 	});	
 }
 
+//Permite ativar a conta de um dado utilizador
+
 function User_ON(Email)
 {
 	bootbox.confirm("<form role='form'>																																																  <div class='text'><b>Introduza o seu código.</b></div><br>																																					      <div class='form-group'>																																													          <input style='width: 300px;' type='password' class='form-control' id='Password'>																																	  </div></form>", function (result) {
@@ -289,6 +302,8 @@ function User_ON(Email)
 		}
 	});
 }
+
+//Permite desativar a conta de um dado utilizador
 
 function User_OFF(Email)
 {
@@ -319,6 +334,8 @@ function User_OFF(Email)
 	});
 }
 
+//Controla o ícone 'chevron' na seção de ajuda
+
 function toggleChevron(e) {
 
     $(e.target)
@@ -326,6 +343,8 @@ function toggleChevron(e) {
         .find("i.indicator")
         .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
 }
+
+//Ao escolher um tipo de letra para o Facebook, é construída uma pré-visualização
 
 function preview_letra(val_letra, tam_letra)
 {
@@ -380,6 +399,9 @@ $(document).ready(function() {
 	$('#cor_fundo').hide();
 	$('#pat_fundo').hide();
 
+	$('#aviso-ok').hide();
+	$('#aviso-rm').hide();
+
 	$('#rm-cor-barra').tooltip('hide');
 	$('#add-pattern-barra').tooltip('hide');
 	$('#rm-pattern-barra').tooltip('hide');
@@ -396,10 +418,14 @@ $(document).ready(function() {
 	$('#accordion').on('hidden.bs.collapse', toggleChevron);
 	$('#accordion').on('shown.bs.collapse', toggleChevron);
 
+	//Controla a navegação entra as tabs da barra lateral
+
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
 	});
+
+	//Controla o botão switch 'Pedir sempre código'
 
 	$('#pin-switch').bootstrapSwitch();
 	
@@ -423,6 +449,8 @@ $(document).ready(function() {
 		}
 	});
 
+	//Controla o botão switch 'Permitir palavras obscenas'
+
 	$('#words-switch').bootstrapSwitch();
 	
 	$('#words-switch').on('switchChange', function (e, data) {
@@ -445,6 +473,8 @@ $(document).ready(function() {
 		}
 	});
 
+	//Controla o botão switch para definir uma cor ou uma imagem para a barra de topo
+
 	$('#barra-switch').bootstrapSwitch();
 	
 	$('#barra-switch').on('switchChange', function (e, data) {
@@ -461,6 +491,8 @@ $(document).ready(function() {
 		}
 	});
 
+	//Controla o botão switch para definir uma cor ou uma imagem para o fundo de ecrã
+
 	$('#fundo-switch').bootstrapSwitch();
 	
 	$('#fundo-switch').on('switchChange', function (e, data) {
@@ -476,6 +508,8 @@ $(document).ready(function() {
 			$('#pat_fundo').show();
 		}
 	});
+
+	//Event listener para alterar a cor da barra de topo dinamicamente
 
 	var c = document.getElementById("cor-barra-input");
 
@@ -499,12 +533,23 @@ $(document).ready(function() {
 
 	                $('#pattern-barra-input').val('');
 
-					chrome.storage.local.set(obj);
+					chrome.storage.local.set(obj, function() {
+
+						$('#aviso-ok').show();
+
+						window.setTimeout(function() {
+
+						    $('#aviso-ok').hide();
+
+						}, 3000);
+					});
 				}
 			}
 		});
 
 	}, false);
+
+	//Guarda os detalhes sobre a imagem para a barra de topo
 
 	$('#add-pattern-barra').on('click', function() {
 
@@ -516,9 +561,20 @@ $(document).ready(function() {
 
         $('#fbBar2').css('background-image', 'url(' + $('#pattern-barra-input').val() + ')');
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a imagem guardada para a barra de topo
 
 	$('#rm-pattern-barra').on('click', function() {
 
@@ -530,9 +586,20 @@ $(document).ready(function() {
 
         $('#fbBar2').css({'background-image': 'none', 'background-color': '#3b5998' });
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a cor atual da barra de topo
 
 	$('#rm-cor-barra').on('click', function() {
 
@@ -545,9 +612,20 @@ $(document).ready(function() {
         $('#cor-barra-input').val("#3b5998");
         $('#cor-barra-input').css("background-color", "#3b5998");
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Event listener para alterar a cor do fundo do ecrã dinamicamente
 
 	var d = document.getElementById("cor-fundo-input");
 
@@ -571,13 +649,24 @@ $(document).ready(function() {
 
 		                $('#pattern-fundo-input').val('');
 
-						chrome.storage.local.set(obj);
+						chrome.storage.local.set(obj, function() {
+
+							$('#aviso-ok').show();
+
+							window.setTimeout(function() {
+
+							    $('#aviso-ok').hide();
+
+							}, 3000);
+						});
 					}
 				}
 			});
 		}
 
 	}, false); 
+
+	//Guarda os detalhes sobre a imagem para o fundo do ecrã
 
 	$('#add-pattern-fundo').on('click', function() {
 
@@ -587,9 +676,20 @@ $(document).ready(function() {
 
         obj['pat-fd-'+$('#email-actual').text()] = $('#pattern-fundo-input').val();
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a imagem guardada para o fundo do ecrã
 
 	$('#rm-pattern-fundo').on('click', function() {
 
@@ -599,9 +699,20 @@ $(document).ready(function() {
 
         $('#pattern-fundo-input').val('');
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Remove a cor atual do fundo do ecrã
 
 	$('#rm-cor-fundo').on('click', function() {
 
@@ -612,9 +723,20 @@ $(document).ready(function() {
         $('#cor-fundo-input').val("#FFFFFF");
         $('#cor-fundo-input').css("background-color", "#FFFFFF");
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 
 	});
+
+	//Adiciona um novo tipo de letra para o facebook
 
 	$('#add-letra').on('click', function() {
 
@@ -688,8 +810,19 @@ $(document).ready(function() {
 					  break;
 		}  
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-ok').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-ok').hide();
+
+			}, 3000);
+		});
 	});
+
+	//Remove o tipo de letra atual do facebook
 
 	$('#rm-letra').on('click', function() {
 
@@ -697,13 +830,26 @@ $(document).ready(function() {
 
 		$('#tam-list').val('-1');
 
+		$('#letra-exemplo').hide();
+
 		var obj = {};
 
 		obj['letra-'+$('#email-actual').text()] = "'lucida grande',tahoma,verdana,arial,sans-serif";
 		obj['tam-lt-'+$('#email-actual').text()] = "11px";
 
-		chrome.storage.local.set(obj);
+		chrome.storage.local.set(obj, function() {
+
+			$('#aviso-rm').show();
+
+			window.setTimeout(function() {
+
+			    $('#aviso-rm').hide();
+
+			}, 3000);
+		});
 	});
+
+	//Ao escolher um tipo de letra, é criada uma pré-visualização dinamicamente
 
 	$("#letras-list").change(function() {
         
@@ -717,6 +863,8 @@ $(document).ready(function() {
         }
     });
 
+	//Ao escolher um tamanho de letra, esta é aplicada imediatamente á pré-visualização
+
     $('#tam-list').change(function() {
 
     	if($('#letras-list').find('option:selected').val() != -1)
@@ -726,6 +874,7 @@ $(document).ready(function() {
     });
 });
 
+//Devolve todos os detalhes guardados sobre o utilizador atual, tais como: cor de fundo, tipos de letra, etc.
 
 function getCustomData()
 {
@@ -848,7 +997,7 @@ function getCustomData()
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click', clickHandler);
+  document.querySelector('button').addEventListener('click', createUser);
   getData();
   getCustomData();
 });

@@ -2,6 +2,14 @@ $(document).ready(function()
 {
   	var x, flag = 0, codigo = null, atv, cor_br = null, pat_br = null, link_lt = null, letra = null, tam_lt = null, cor_fd = null, pat_fd = null, pin = null, words = null;
 
+  	/*****************************************************************************************************
+	******************************************************************************************************
+
+											FUNÇÕES AUXILIARES
+	
+	******************************************************************************************************
+	*****************************************************************************************************/
+
   	//Obter o id de utilizador através do cookie
 
 	var cookie = "c_user=";
@@ -99,6 +107,24 @@ $(document).ready(function()
 			flag = 0;
 		}
     }
+
+    //Código para tratar das cores
+
+	function rgb2hex(rgb){
+		 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		 return "#" +
+		  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+	}
+
+	/*****************************************************************************************************
+	******************************************************************************************************
+
+											CÓDIGO PRINCIPAL
+	
+	******************************************************************************************************
+	*****************************************************************************************************/
 
 	//Vamos obter todos os users guardados e comparar o seu id com o id da sessão actual. Se não existir vamos guardar o id através do chrome storage para a possibilidade ser criada uma nova conta com esse id
 
@@ -234,9 +260,7 @@ $(document).ready(function()
 
 								if(_.isEmpty(banned) == false)
 								{
-									bootbox.alert("<div><b style='font-size: 12px'>Não é possível publicar o texto inserido.</b><br><br>Para proceder deve apagar as seguintes palavras da sua publicação: <br><br><span id='ban'></span></div>").find('.modal-content').css("width", "400px");
-									
-									$('#ban').text(banned);
+									bootbox.alert("<div><b style='font-size: 12px'>Não é possível publicar o texto inserido.</b><br><br>Para proceder deve apagar as palavras impróprias da sua publicação. <br></div>").find('.modal-content').css("width", "400px");
 								}
 								else
 								{
@@ -251,17 +275,5 @@ $(document).ready(function()
 				}
 			}
 		}
-	});
-
-	//Código para tratar das cores
-
-	function rgb2hex(rgb){
-		 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-		 return "#" +
-		  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-		  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-		  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
-	}
-
-    
+	}); 
 });

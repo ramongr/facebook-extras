@@ -2,26 +2,26 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-	<title>Facebook Guardian</title>
+	<title>Facebook Extras</title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./bootstrap-switch.css">
-	<link rel="stylesheet" href="./bootstrap.css">
-	<link rel="stylesheet" href="./simple-sidebar.css">
-	<link rel="stylesheet" href="./options.css" />
+	<link rel="stylesheet" href="../css/bootstrap-switch.css">
+	<link rel="stylesheet" href="../css//bootstrap.css">
+	<link rel="stylesheet" href="../css//simple-sidebar.css">
+	<link rel="stylesheet" href="../css//options.css" />
 	
-	<script src="jquery-2.0.3.js"></script>
-	<script src="jquery-2.0.3.min.js"></script>
-	<script src="bootstrap.min.js"></script>
-	<script src="bootstrap.js"></script>
-	<script src="bootbox.min.js"></script>
-	<script src="bootstrap-switch.js"></script>
-	<script src="options.js"></script>
-	<script src="sha3.js"></script>
-	<script src="lodash.min.js"></script>
-	<script src="jquery.translate.js"></script>
-	<script src="lang.js"></script>
-	<script type="text/javascript" src="./jscolor/jscolor.js"></script>
+	<script src="../js/jquery-2.0.3.js"></script>
+	<script src="../js/jquery-2.0.3.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/bootbox.min.js"></script>
+	<script src="../js/bootstrap-switch.js"></script>
+	<script src="../js/options.js"></script>
+	<script src="../js/sha3.js"></script>
+	<script src="../js/lodash.min.js"></script>
+	<script src="../js/jquery.translate.js"></script>
+	<script src="../js/lang.js"></script>
+	<script type="text/javascript" src="../jscolor/jscolor.js"></script>
 
 </head>
 
@@ -76,7 +76,20 @@
             </div>
             <div id="custom" class="tab-pane fade">
             	<div class="row">
-	            	<br><br>
+	            	<br>
+	            	<div class="center-div">
+	            		<div id="aviso-ok" class="alert alert-success alert-dismissable">
+						  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						  Guardado com sucesso.
+						  <br>
+						</div>
+						<div id="aviso-rm" class="alert alert-danger alert-dismissable">
+						  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						  Removido com sucesso.
+						  <br>
+						</div>
+	            	</div>
+	            	<br>
 	            	<div class="center-div">
 						<b style="color: red">Aviso: </b>Após qualquer alteração efetuada, é necessário recarregar a página do Facebook.
 						<br><br>
@@ -288,6 +301,8 @@
 						    <div id="collapse4" class="panel-collapse collapse in">
 						      <div class="panel-body">
 						        <p class="text" style="text-align: justify">
+						        	Caso o utilizador não queira introduzir o código sempre que pretenda efetuar uma nova publicação, existe a opção de desativar a introdução do código. Só tem de clicar no botão <i>Pedir sempre código</i>.<br><br>
+						        	Para prevenir a escrita de palavras obscenas, esta aplicação bloqueia a publicação de textos com essas mesma palavras por defeito. Caso pretenda desativar essa funcionalidade, carregue no botão <i>Bloquear palavras obscenas</i>.<br><br>
 			            			<b>Atenção:</b> Após qualquer operação deve recarregar a página do <i>Facebook</i> para as alterações fazerem efeito.
 			            		</p>
 						      </div>
@@ -321,7 +336,6 @@
 	        </div>
         </div>
     </div>
-
 </body>
 
 </html>
